@@ -14,7 +14,6 @@ const DirectorForm = ({ addDirector, editDirector, directorToEdit }) => {
       setNationality('');
     }
   }
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
