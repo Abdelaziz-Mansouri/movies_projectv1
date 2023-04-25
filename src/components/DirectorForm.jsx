@@ -15,18 +15,8 @@ const DirectorForm = ({ addDirector, editDirector, directorToEdit }) => {
     }
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} />
-      </div>
-      <div>
-        <label>Nationality:</label>
-        <input type="text" value={nationality} onChange={e => setNationality(e.target.value)} />
-      </div>
-      <button type="submit">{directorToEdit ? 'Edit Director' : 'Add Director'}</button>
-    </form>
-  );
+    <div>DirectorForm</div>
+  )
 }
 
-export default DirectorForm;
+export default DirectorForm

@@ -1,17 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const GenreList = ({ genres, deleteGenre, editGenre }) => {
+const GenreList = () => {
   return (
-    <ul>
-      {genres.map(genre => (
-        <li key={genre.id}>
-          {genre.name}
-          <button onClick={() => editGenre(genre)}>Edit</button>
-          <button onClick={() => deleteGenre(genre.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
-  );
+    <div>GenreList</div>
+  )
 }
 
-export default GenreList;
+export default GenreList

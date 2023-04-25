@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
-import { Link } from 'react-router-dom';
 
-function MovieList() {
+
+
+const MovieList = () => {
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -14,10 +16,22 @@ function MovieList() {
         console.log(error);
       });
   }, []);
+  
+  const deleteMovie = (id) => {
+    axios.delete(`/movies/${id}`)
+      .then(response => {
+        console.log(response);
+        // window.location.reload();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   return (
-    <div>
-      <h1>Movie List</h1>
+    <>
+      <h1>MovieList</h1>
+
       <table>
         <thead>
           <tr>
@@ -38,26 +52,15 @@ function MovieList() {
               <td>{movie.genre_name}</td>
               <td>{movie.director_name}</td>
               <td>{movie.rating_name}</td>
-              <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
-              <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
+
+              {/* <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
+              <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td> */}
             </tr>
           ))}
         </tbody>
       </table>
-      <Link to="/movies/new">Add Movie</Link>
-    </div>
-  );
+    </>
+  )
 }
 
-function deleteMovie(id) {
-  axios.delete(`http://localhost:5000/movies/${id}`)
-    .then(response => {
-      console.log(response);
-      window.location.reload();
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
-
-export default MovieList;
+export default MovieList
