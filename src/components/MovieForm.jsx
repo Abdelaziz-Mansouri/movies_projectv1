@@ -5,13 +5,14 @@ import axios from '../api/axios';
 const MovieForm = () => {
   const errRef=useRef();
 
-  const [data , setData]=useState({
+  const [myData , setmyData]=useState({
     title:'',
     releaseDate : '',
     genreId : '',
     directorId : '',
     ratingId : ''
   });
+  const [data, setData] = useState([]);
 
   const [selectedOptionDirector, setselectedOptionDirector] = useState('');
   const [selectedOptionGenre, setselectedOptionGenre] = useState('');
@@ -20,22 +21,22 @@ const MovieForm = () => {
   // Director Data
   useEffect(() => {
     axios.get('/Directors/GetAllDirectors') 
-      .then(response => setselectedOptionDirector(response.data))
+      .then(response => setData(response.data))
       .catch(error => console.error(error));
   }, []);
   // Genre Data
-  useEffect(() => {
-    axios.get('/Genres') 
-      .then(response => setselectedOptionGenre(response.data))
-      .catch(error => console.error(error));
-  }, []);
+  // useEffect(() => {
+  //   axios.get('/Genres') 
+  //     .then(response => setselectedOptionGenre(response.data))
+  //     .catch(error => console.error(error));
+  // }, []);
 
-  // Rating data
-  useEffect(() => {
-    axios.get('/Ratings/GetAllRating') 
-      .then(response => setselectedOptionRating(response.data))
-      .catch(error => console.error(error));
-  }, []);
+  // // Rating data
+  // useEffect(() => {
+  //   axios.get('/Ratings/GetAllRating') 
+  //     .then(response => setselectedOptionRating(response.data))
+  //     .catch(error => console.error(error));
+  // }, []);
 
   const [errMsg , setErrMsg] =useState('')
 
@@ -79,8 +80,8 @@ const MovieForm = () => {
                         type="text"
                         id="title"
                         autoComplete="off"
-                        onChange={(e) => setData.title(e.target.value)}
-                        value={data.title}
+                        onChange={(e) => setmyData(e.target.value)}
+                        value={myData.title}
                         required
                         aria-describedby="uidnote"
                     />
@@ -91,8 +92,8 @@ const MovieForm = () => {
                     <input
                         type="text"
                         id="releaseDate"
-                        onChange={(e) => setData.releaseDate(e.target.value)}
-                        value={data.releaseDate}
+                        onChange={(e) => setmyData(e.target.value)}
+                        value={myData.releaseDate}
                         required
                     />
                     <label htmlFor="director">
@@ -101,8 +102,8 @@ const MovieForm = () => {
                     <select value={selectedOptionDirector} onChange={handleSelectChangeDirector}>
                       <option value="">-- Select an option --</option>
                       {data.map(option => (
-                        <option key={option.id} value={option.value}>
-                          {option.label}
+                        <option key={option.id} value={option.id}>
+                          {option}
                         </option>
                       ))}
                     </select>
