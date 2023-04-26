@@ -8,9 +8,10 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('')
+    axios.get('/GetAllMovies')
       .then(response => {
         setMovies(response.data);
+        console.log(response);
       })
       .catch(error => {
         console.log(error);
@@ -48,10 +49,10 @@ const MovieList = () => {
           {movies.map(movie => (
             <tr key={movie.id}>
               <td>{movie.title}</td>
-              <td>{movie.release_date}</td>
-              <td>{movie.genre_name}</td>
-              <td>{movie.director_name}</td>
-              <td>{movie.rating_name}</td>
+              <td>{movie.releaseDate}</td>
+              <td>{movie.genreId}</td>
+              <td>{movie.directorId}</td>
+              <td>{movie.ratingId}</td>
 
               {/* <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
               <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td> */}
