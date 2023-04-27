@@ -63,6 +63,7 @@ const MovieList = () => {
           ))}
         </tbody>
       </table>
+      <Link to="/movies/new">Add Movie</Link>
     </>
   )
 }
