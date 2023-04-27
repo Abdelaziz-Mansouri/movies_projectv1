@@ -10,7 +10,7 @@ const MovieList = () => {
 
   
   useEffect(() => {
-    axios.get('/CustomerGet')
+    axios.get('/Movies/CustomerGet')
       .then(response => {
         setMovies(response.data);
         console.log(response);
@@ -19,10 +19,10 @@ const MovieList = () => {
         console.log(error);
       });
     
-  }, []);
+  }, [movies]);
   
   const deleteMovie = (id) => {
-    axios.delete(`/delete/${id}`)
+    axios.delete(`/Movies/DeleteMovie/${id}`)
       .then(response => {
         console.log(response);
         // window.location.reload();
@@ -57,7 +57,7 @@ const MovieList = () => {
               <td>{movie.lastName} {movie.fistName}</td>
               <td>{movie.nameRating}</td>
 
-              <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
+              <td><Link to={`/Movies/movies/${movie.id}`}>Edit</Link></td>
               <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
             </tr>
           ))}
