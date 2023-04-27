@@ -107,8 +107,29 @@ const MovieForm = () => {
                         </option>
                       ))}
                     </select>
-                    
-                    <button disabled={false}>Sign Up</button>
+                    <label >
+                        Genre:
+                    </label>
+                    <select value={selectedOptionGenre} onChange={handleSelectChangeGenre}>
+                      <option value="">-- Select an option --</option>
+                      {data.map(option => (
+                        <option key={option.id} value={option.id}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <label >
+                        Rating:
+                    </label>
+                    <select value={selectedOptionRating} onChange={handleSelectChangeRating}>
+                      <option value="">-- Select an option --</option>
+                      {data.map(option => (
+                        <option key={option.id} value={option.id}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <button disabled={false}>Add</button>
                 </form>
   )
 }
