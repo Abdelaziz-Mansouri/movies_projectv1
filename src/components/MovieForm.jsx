@@ -1,9 +1,9 @@
 import React from 'react'
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect} from 'react';
 import axios from '../api/axios';
+import { useParams } from 'react-router';
 
 const MovieForm = () => {
-  const errRef = useRef();
 
   const [myData , setmyData]=useState({
     title:'',
@@ -12,6 +12,10 @@ const MovieForm = () => {
     genreId : 0,
     ratingId : 0
   });
+  
+
+  const {id} = useParams();
+  console.log(id)
 
   const [selectedOptionDirector, setselectedOptionDirector] = useState([]);
   const [selectedOptionGenre, setselectedOptionGenre] = useState([]);
@@ -42,6 +46,7 @@ const MovieForm = () => {
   }, []);
 
   const [errMsg , setErrMsg] =useState('')
+
   const handlechangeTitle = event => {
     setmyData({...myData , title : event.target.value});
   };
@@ -58,19 +63,50 @@ const MovieForm = () => {
     setmyData({...myData , ratingId : event.target.value});
   };
 
-  // useEffect(() => { console.log(myData) },[myData])
+
 
   const [success , setSuccess] = useState(false);
 
-    const handleSubmit = async (e) =>{
-      e.preventDefault();
-      console.log(myData)
-      try{
-        const response=await axios.post('/Movies/PostMovie', 
+  useEffect(() =>{
+    const fetchData= async () =>{
+      axios.get(`/Movies/GetById/${id}`)
+      .then((response) => {
+  
+        setmyData(response.data)
+      })
+      .catch((error) => {
+        // Handle the error
+        console.error(error);
+      });
+    }
+    fetchData();
+  } , [id])
 
-            {title : myData.title , releaseDate : myData.releaseDate , genreId : myData.genreId , directorId :  myData.directorId , ratingId : myData.ratingId});
-            setSuccess(true);
-            console.log("succes")
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    console.log(myData)
+    try{
+      if(!id){
+        const response=await axios.post('/Movies/PostMovie', 
+          {title : myData.title , releaseDate : myData.releaseDate , genreId : myData.genreId , directorId :  myData.directorId , ratingId : myData.ratingId});
+          setSuccess(true);
+      }else{
+        const response = await axios.put(`/Movies/UpdateMovie/${id}`, 
+        {
+          title: myData.title,
+          releaseDate: myData.releaseDate,
+          directorId: myData.directorId,
+          genreId: myData.genreId,
+          ratingId: myData.ratingId
+        })
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+        
     }catch(err){
         if(!err?.response){
             setErrMsg('No Server Response')
@@ -80,6 +116,7 @@ const MovieForm = () => {
         }
     }
   }
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -138,9 +175,10 @@ const MovieForm = () => {
                         </option>
                       ))}
                     </select>
-                    <button disabled={false}>Add</button>
+                    <button disabled={false}>{ id ? "Update" : "Add"}</button>
                 </form>
   )
 }
+
 
 export default MovieForm
