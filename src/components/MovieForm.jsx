@@ -1,9 +1,10 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from '../api/axios';
 
 const MovieForm = () => {
-  const errRef = useRef();
+  const navigate = useNavigate();
 
   const [myData , setmyData]=useState({
     title:'',
@@ -79,6 +80,9 @@ const MovieForm = () => {
             setErrMsg('Adding Movie Failed');
         }
     }
+
+
+    navigate('/movies')
   }
 
   return (

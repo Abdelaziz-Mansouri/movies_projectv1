@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import axios from '../api/axios';
+import { useNavigate } from "react-router-dom";
 
 const GenreForm = () => {
+
+  const navigate = useNavigate();
 
   const [genre, setGenre] = useState({
     id : '',
@@ -19,6 +22,7 @@ const GenreForm = () => {
     e.preventDefault();
     let response = await axios.post('/Genres/AddGenre', {id: genre.id , name : genre.name}).catch(err => console.log(err));
     console.log(JSON.stringify(response));
+    navigate('/genres')
   }
 
   return (

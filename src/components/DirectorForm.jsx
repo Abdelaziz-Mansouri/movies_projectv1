@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import axios from '../api/axios';
+import { useNavigate } from "react-router-dom";
 
 const DirectorForm = () => {
+
+  const navigate = useNavigate();
 
   const [director, setDirector] = useState({
     id : '',
@@ -20,6 +23,7 @@ const DirectorForm = () => {
     e.preventDefault();
     let response = await axios.post('/Directors/AddDirector', {id: director.id , firstName : director.firstName, lastName : director.lastName}).catch(err => console.log(err));
     console.log(JSON.stringify(response));
+    navigate('/directors')
   }
 
   return (
