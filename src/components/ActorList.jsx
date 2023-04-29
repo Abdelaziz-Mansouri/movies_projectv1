@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { Link } from 'react-router-dom';
 
-const ActorList = () => {
 
+const ActorList = () => {
 
   const [actors, setActors] = useState([])
 
@@ -18,6 +18,15 @@ const ActorList = () => {
   
   }, [])
   
+  const deleteActor = (id) => {
+    axios.delete(`/Actors/DeleteActor/${id}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   return (
     <>
@@ -27,6 +36,8 @@ const ActorList = () => {
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +45,8 @@ const ActorList = () => {
             <tr key={actor.id}>
               <td>{actor.firstName}</td>
               <td>{actor.lastName}</td>
+              <td><Link to={`/actors/${actor.id}`}>Edit</Link></td>
+              <td><button onClick={() => deleteActor(actor.id)}>Delete</button></td>
             </tr>
           ))}
           <tr>
