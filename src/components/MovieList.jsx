@@ -19,7 +19,7 @@ const MovieList = () => {
         console.log(error);
       });
     
-  }, [movies]);
+  }, []);
   
   const deleteMovie = (id) => {
     axios.delete(`/Movies/DeleteMovie/${id}`)
@@ -56,7 +56,6 @@ const MovieList = () => {
               <td>{movie.nameGenre}</td>
               <td>{movie.lastName} {movie.fistName}</td>
               <td>{movie.nameRating}</td>
-
               <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
               <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
             </tr>
