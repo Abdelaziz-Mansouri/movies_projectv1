@@ -12,6 +12,8 @@ import ActorList from './components/ActorList';
 import ActorForm from './components/ActorForm';
 import RatingList from './components/RatingList';
 import RatingForm from './components/RatingForm';
+import CastList from './components/CastList';
+import CastForm from './components/CastForm';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
         <Route exact path="/ratings" element={<RatingList/>} />
         <Route exact path="/ratings/new" element={<RatingForm/>} />
         <Route exact path="/ratings/:id" element={<RatingForm/>} />
+        <Route exact path="/casts" element={<CastList/>} />
+        <Route exact path="/casts/new" element={<CastForm/>} />
+        <Route exact path="/casts/:id" element={<CastForm/>} />
       </Routes>
     </Router>
   )

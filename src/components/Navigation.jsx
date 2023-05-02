@@ -11,6 +11,7 @@ function Navigation() {
         <li><Link to="/directors">Directors</Link></li>
         <li><Link to="/actors">Actors</Link></li>
         <li><Link to="/ratings">Ratings</Link></li>
+        <li><Link to="/casts">Casts</Link></li>
       </ul>
     </div>
   );
