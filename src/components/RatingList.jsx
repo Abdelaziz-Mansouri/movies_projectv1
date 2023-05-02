@@ -34,7 +34,7 @@ const RatingList = () => {
       <table>
         <thead>
           <tr>
-            <th>id</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
             <th>Edit</th>
@@ -54,7 +54,7 @@ const RatingList = () => {
         </tbody>
       </table>
       
-      <Link to="/ratings/new">Add Director</Link>
+      <Link to="/ratings/new">Add Rating</Link>
     </>
   )
 }

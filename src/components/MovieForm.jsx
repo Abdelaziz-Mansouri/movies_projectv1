@@ -17,7 +17,6 @@ const MovieForm = () => {
   
 
   const {id} = useParams();
-  console.log(id)
 
   const [selectedOptionDirector, setselectedOptionDirector] = useState([]);
   const [selectedOptionGenre, setselectedOptionGenre] = useState([]);
@@ -70,18 +69,20 @@ const MovieForm = () => {
   const [success , setSuccess] = useState(false);
 
   useEffect(() =>{
-    const fetchData= async () =>{
-      axios.get(`/Movies/GetById/${id}`)
-      .then((response) => {
-  
-        setmyData(response.data)
-      })
-      .catch((error) => {
-        // Handle the error
-        console.error(error);
-      });
+    if(id){
+      const fetchData= async () =>{
+        axios.get(`/Movies/GetById/${id}`)
+        .then((response) => {
+    
+          setmyData(response.data)
+        })
+        .catch((error) => {
+          // Handle the error
+          console.error(error);
+        });
+      }
+      fetchData();
     }
-    fetchData();
   } , [id])
 
   const handleSubmit = async (e) =>{
@@ -135,7 +136,6 @@ const MovieForm = () => {
                         onChange={handlechangeTitle}
                         value={myData.title}
                         required
-                        aria-describedby="uidnote"
                     />
 
                     <label htmlFor="releaseDate">
