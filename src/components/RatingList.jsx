@@ -47,7 +47,7 @@ const RatingList = () => {
               <td>{rating.id}</td>
               <td>{rating.name}</td>
               <td>{rating.description}</td>
-              <td><Link to={`/ratings/${ratings.id}`}>Edit</Link></td>
+              <td><Link to={`/ratings/${rating.id}`}>Edit</Link></td>
               <td><button onClick={() => deleteRatings(rating.id)}>Delete</button></td>
             </tr>
           ))}
