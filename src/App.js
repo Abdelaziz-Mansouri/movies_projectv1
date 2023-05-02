@@ -15,11 +15,14 @@ import RatingForm from './components/Admin/RatingForm';
 import CastList from './components/Admin/CastList';
 import CastForm from './components/Admin/CastForm';
 
+import Home from './components/Client/Home';
+
 function App() {
   return (
     <Router>
       <Navigation />
       <Routes>
+        {/* Admin */}
         <Route exact path="/" element={<MovieList/>} />
         <Route exact path="/movies" element={<MovieList/>} />
         <Route exact path="/movies/new" element={<MovieForm/>} />
@@ -39,6 +42,9 @@ function App() {
         <Route exact path="/casts" element={<CastList/>} />
         <Route exact path="/casts/new" element={<CastForm/>} />
         <Route exact path="/casts/:id" element={<CastForm/>} />
+        {/* Client */}
+        <Route exact path="/home" element={<Home/>} />
+
       </Routes>
     </Router>
   )
