@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
-import axios from '../api/axios';
+import axios from '../../api/axios';
 
 const CastForm = () => {
 
@@ -62,12 +62,12 @@ const CastForm = () => {
     e.preventDefault();
     let response;
     if(id){  
-      response = await axios.put('/Casts/UpdateCast/'+id, { characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId }).catch(err => console.log(err));
+      response = await axios.put('/Casts/UpdateCast/'+id, {id: cast.id, characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId }).catch(err => console.log(err));
     }else{
       response = await axios.post('/Casts/AddCast', { id: cast.id, characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId  }).catch(err => console.log(err));
     }
     console.log(JSON.stringify(response));
-    // navigate('/casts')
+    navigate('/casts')
   }
 
   return (

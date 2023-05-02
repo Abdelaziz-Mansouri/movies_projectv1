@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { Link } from 'react-router-dom';
 
 const GenreList = () => {

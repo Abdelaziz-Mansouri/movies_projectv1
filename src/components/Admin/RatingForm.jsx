@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { useParams } from 'react-router';
 
 const RatingForm = () => {

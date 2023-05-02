@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Navigation from './components/Navigation';
-import MovieList from './components/MovieList';
-import MovieForm from './components/MovieForm';
-import GenreList from './components/GenreList';
-import GenreForm from './components/GenreForm';
-import DirectorList from './components/DirectorList';
-import DirectorForm from './components/DirectorForm';
-import ActorList from './components/ActorList';
-import ActorForm from './components/ActorForm';
-import RatingList from './components/RatingList';
-import RatingForm from './components/RatingForm';
-import CastList from './components/CastList';
-import CastForm from './components/CastForm';
+import Navigation from './components/Admin/Navigation';
+import MovieList from './components/Admin/MovieList';
+import MovieForm from './components/Admin/MovieForm';
+import GenreList from './components/Admin/GenreList';
+import GenreForm from './components/Admin/GenreForm';
+import DirectorList from './components/Admin/DirectorList';
+import DirectorForm from './components/Admin/DirectorForm';
+import ActorList from './components/Admin/ActorList';
+import ActorForm from './components/Admin/ActorForm';
+import RatingList from './components/Admin/RatingList';
+import RatingForm from './components/Admin/RatingForm';
+import CastList from './components/Admin/CastList';
+import CastForm from './components/Admin/CastForm';
 
 function App() {
   return (
