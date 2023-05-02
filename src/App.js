@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/actors/:id" element={<ActorForm/>} />
         <Route exact path="/ratings" element={<RatingList/>} />
         <Route exact path="/ratings/new" element={<RatingForm/>} />
-        <Route exact path="/ratings/:id" element={<RatingForm/>} />
+        <Route exact path="/ratings/:idFromList" element={<RatingForm/>} />
         <Route exact path="/casts" element={<CastList/>} />
         <Route exact path="/casts/new" element={<CastForm/>} />
         <Route exact path="/casts/:id" element={<CastForm/>} />

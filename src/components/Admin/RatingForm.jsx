@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from '../../api/axios';
 import { useParams } from 'react-router';
@@ -8,7 +8,7 @@ const RatingForm = () => {
 
   const navigate = useNavigate();
   
-  const {id} = useParams();
+  const {idFromList} = useParams();
 
   const [ratingData , setRatingData]=useState({
     id: 0 ,
@@ -46,6 +46,23 @@ const RatingForm = () => {
       }
     };
 
+    useEffect(() =>{
+      if(idFromList){
+        const fetchData= async () =>{
+          axios.get(`/Ratings/GetById/${idFromList}`)
+          .then((response) => {
+      
+            setRatingData(response.data)
+          })
+          .catch((error) => {
+            // Handle the error
+            console.error(error);
+          });
+        }
+        fetchData();
+      }
+    } , [idFromList])
+
   const handlechangeName = event => {
     setRatingData({...ratingData , name : event.target.value});
   };
@@ -57,18 +74,18 @@ const RatingForm = () => {
     e.preventDefault();
     console.log(ratingData)
     try{
-      if(!id){
+      if(!idFromList){
         const response=await axios.post('/Ratings/AddRating', 
           {id : ratingData.id ,name : ratingData.name , description : ratingData.description });
           setSuccess(true);
       }else{
-        const response = await axios.put(`/Ratings/UpdateRating/${id}`, 
+        const response = await axios.put(`/Ratings/UpdateRating/${idFromList}`, 
         {
           name: ratingData.name,
           description: ratingData.description
         })
           .then(response => {
-            console.log(response.data);
+            setSuccess(true)
           })
           .catch(error => {
             console.error(error);
@@ -129,7 +146,7 @@ const RatingForm = () => {
             required
         />
         
-        <button disabled={false}>{ id ? "Update" : "Add"}</button>
+        <button disabled={false}>{ idFromList ? "Update" : "Add"}</button>
     </form>
     </div>
   )
