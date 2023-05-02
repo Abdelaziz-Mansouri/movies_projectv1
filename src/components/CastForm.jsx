@@ -12,8 +12,8 @@ const CastForm = () => {
   const [cast, setCast] = useState({
     id: '',
     characterName: '',
-    movieName: '',
-    actorName: ''
+    movieId: '',
+    actorId: ''
   });
 
   const [actors, setActors] = useState([]);
@@ -48,24 +48,26 @@ const CastForm = () => {
 
 
   const handleInput = (e) => {
-    const newcast = { ...cast }
-    newcast[e.target.id] = e.target.value
-    console.log(e.target.value);
-    setCast(newcast);
-    console.log(newcast);
-    console.log(cast.movieName, cast.movieId, e.target.value);
+    // const newcast = { ...cast }
+    // newcast[e.target.id] = e.target.value
+    // console.log(e.target.value);
+    // setCast(newcast);
+    // console.log(newcast);
+
+    setCast({...cast, [e.target.id] : e.target.value})
+    console.log(cast);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let response;
     if(id){  
-      response = await axios.put('/Casts/UpdateCast/'+id, { characterName: cast.characterName, movieName: cast.movieName, actorName: cast.actorName }).catch(err => console.log(err));
+      response = await axios.put('/Casts/UpdateCast/'+id, { characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId }).catch(err => console.log(err));
     }else{
-      response = await axios.post('/Casts/AddCast', { id: cast.id, characterName: cast.characterName, movieName: cast.movieName, actorName: cast.actorName  }).catch(err => console.log(err));
+      response = await axios.post('/Casts/AddCast', { id: cast.id, characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId  }).catch(err => console.log(err));
     }
     console.log(JSON.stringify(response));
-    navigate('/casts')
+    // navigate('/casts')
   }
 
   return (
@@ -78,11 +80,11 @@ const CastForm = () => {
         <label htmlFor="">entrer le nom de character</label>
         <input type="text" id='characterName' value={cast.characterName} onInput={(e) => { handleInput(e) }} />
         <label htmlFor="">select movie</label>
-        <select name="" id="MovieName" value={cast.movieId} onInput={(e) => { handleInput(e) }}>
+        <select name="" id="movieId" value={cast.movieId}  onInput={(e) => { handleInput(e) }}>
           {movies.map(movie => (<option value={movie.id} key={movie.id}>{movie.title}</option>))}
         </select>
         <label htmlFor="">select actor</label>
-        <select name="" id="ActorName" value={cast.actorId} onInput={(e) => { handleInput(e) }}>
+        <select name="" id="actorId" value={cast.actorId} onInput={(e) => { handleInput(e) }}>
           {actors.map(actor => (<option value={actor.id} key={actor.id}>{actor.firstName + actor.lastName}</option>))}
         </select>
         <button onClick={(e) => { handleSubmit(e) }}>{id ? 'Modifier' : 'Ajouter'}</button>

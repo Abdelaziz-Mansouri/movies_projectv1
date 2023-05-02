@@ -52,7 +52,7 @@ const CastList = () => {
                     ))}
                 </tbody>
             </table>
-            <Link to="/actors/new">Add Actor</Link>
+            <Link to="/casts/new">Add Cast</Link>
             
         </>
     )
