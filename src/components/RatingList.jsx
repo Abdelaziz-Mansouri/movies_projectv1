@@ -25,7 +25,7 @@ const RatingList = () => {
       <table>
         <thead>
           <tr>
-            <th>id</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Description</th>
           </tr>
@@ -33,6 +33,7 @@ const RatingList = () => {
         <tbody>
           {ratings.map((rating) => (
             <tr key={rating.id}>
+              <td>{rating.id}</td>
               <td>{rating.name}</td>
               <td>{rating.description}</td>
             </tr>
@@ -43,7 +44,7 @@ const RatingList = () => {
         </tbody>
       </table>
       
-      <Link to="/ratings/new">Add Director</Link>
+      <Link to="/ratings/new">Add Rating</Link>
     </>
   )
 }
