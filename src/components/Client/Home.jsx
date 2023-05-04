@@ -1,9 +1,18 @@
 import React from 'react'
 import '../../index.css'
+import styles from '../../style'
+import Header from './Header'
+import MovieGroup from './MovieGroup'
+import GenreGroup from './GenreGroup'
 
 const Home = () => {
   return (
-    <div className='text-red-800'>Home</div>
+    <>
+      <Header/>
+      <GenreGroup/>
+      <MovieGroup/>
+    </>
+    
   )
 }
 
