@@ -3,7 +3,7 @@ import GenrePicture from './GenrePicture'
 
 const GenreGroup = () => {
     return (
-        <div className=''>
+        <div className='flex gap-[36px] -translate-x-[1000px]'>
             <GenrePicture />
             <GenrePicture />
             <GenrePicture />

@@ -7,11 +7,11 @@ import GenreGroup from './GenreGroup'
 
 const Home = () => {
   return (
-    <>
+    <div className='overflow-x-hidden'>
       <Header/>
       <GenreGroup/>
       <MovieGroup/>
-    </>
+    </div>
     
   )
 }
