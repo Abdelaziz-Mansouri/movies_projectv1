@@ -47,7 +47,7 @@ const MovieGroup = () => {
       </div>
       <div className="flex mt-[73px] gap-[115px] justify-center flex-wrap h-[1160px] overflow-hidden" ref={moviesContainer}>
         {movies.map(movie =>(
-          <MoviePicture title = {movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0,4)} nameRating={movie.nameRating}/>
+          <MoviePicture key={movie.id} id={movie.id} title = {movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0,4)} nameRating={movie.nameRating}/>
         ))}
       </div>
       <div className={movies.length > 6 ? 'flex justify-center mt-[45px]' : 'hidden'}>
