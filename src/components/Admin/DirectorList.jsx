@@ -18,7 +18,15 @@ const DirectorList = () => {
   
   }, [])
   
-
+  const deleteDirector = (id) => {
+    axios.delete(`/Directors/DeleteDirector/${id}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   return (
     <>
       <h1>Directors List</h1>
@@ -34,11 +42,10 @@ const DirectorList = () => {
             <tr key={director.id}>
               <td>{director.firstName}</td>
               <td>{director.lastName}</td>
+              <td><Link to={`/directors/${director.id}`}>Edit</Link></td>
+              <td><button onClick={() => deleteDirector(director.id)}>Delete</button></td>
             </tr>
           ))}
-          <tr>
-            <td></td>
-          </tr>
         </tbody>
       </table>
       

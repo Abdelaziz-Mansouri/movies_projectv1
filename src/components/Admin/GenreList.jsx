@@ -16,7 +16,16 @@ const GenreList = () => {
       .catch(err => console.log(err))
   },[])
 
-
+    
+  const deleteGenre = (id) => {
+    axios.delete(`/Genres/DeleteGenre/${id}`)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   return (
     <>
       <h1>Genres List</h1>
@@ -30,11 +39,10 @@ const GenreList = () => {
           {genres.map((genre) => (
             <tr key={genre.id}>
               <td>{genre.name}</td>
+              <td><Link to={`/genres/${genre.id}`}>Edit</Link></td>
+              <td><button onClick={() => deleteGenre(genre.id)}>Delete</button></td>
             </tr>
           ))}
-          <tr>
-            <td></td>
-          </tr>
         </tbody>
       </table>
       <Link to="/genres/new">Add Genre</Link>

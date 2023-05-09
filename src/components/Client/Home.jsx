@@ -11,6 +11,9 @@ const Home = () => {
       <Header/>
       <GenreGroup/>
       <MovieGroup/>
+      <div>
+        
+      </div>
     </div>
     
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from '../../api/axios';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 const MovieForm = () => {
   const navigate = useNavigate();
@@ -17,8 +17,9 @@ const MovieForm = () => {
     images: []
   });
 
-
   const { id } = useParams();
+
+  
 
   const [selectedOptionDirector, setselectedOptionDirector] = useState([]);
   const [selectedOptionGenre, setselectedOptionGenre] = useState([]);
@@ -85,7 +86,6 @@ const MovieForm = () => {
       const fetchData = async () => {
         axios.get(`/Movies/GetById/${id}`)
           .then((response) => {
-
             setmyData(response.data)
           })
           .catch((error) => {
@@ -99,91 +99,51 @@ const MovieForm = () => {
 
   const handleSubmit = async (e) => {
 
-
-
+    
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("id", myData.id);
-    formData.append("title", myData.title);
-    formData.append("releaseDate", myData.releaseDate);
-    formData.append("genreId", myData.genreId);
-    formData.append("directorId", myData.directorId);
-    formData.append("ratingId", myData.ratingId);
-
-    console.log(myData.images[0][0])
-
-    Array.from(myData.images[0]).forEach((image) => {
-
-     formData.append('images', image);
-      
-
-       
-    })
-
-    console.log(myData);
-  
-  
-    // formData.append('images', Array.from(myData.images[0]));
-
-    // console.log(myData.images[0][0])
 
 
 
-    
-    for (let entry of formData.entries()) {
-      console.log(entry);
-    }
 
-
-    console.log(formData.getAll('images'))
-
-    
     try {
-      await axios.post('/Movies/PostMovie', formData , {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }).then((response) => { console.log(response) });
-      // handle success
+      if(!id){
+        const formData = new FormData();
+        formData.append("id", myData.id);
+        formData.append("title", myData.title);
+        formData.append("releaseDate", myData.releaseDate);
+        formData.append("genreId", myData.genreId);
+        formData.append("directorId", myData.directorId);
+        formData.append("ratingId", myData.ratingId);
+
+        Array.from(myData.images[0]).forEach((image) => {
+          formData.append('images', image);
+        })
+        await axios.post('/Movies/PostMovie', formData , {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }).then((response) => { console.log(response) });
+      
+        // handle success
+      }else{
+        const response = await axios.put(`/Movies/UpdateMovie/${id}`, 
+        {
+          id : id,
+          title: myData.title,
+          releaseDate: myData.releaseDate,
+          directorId: myData.directorId,
+          genreId: myData.genreId,
+          ratingId: myData.ratingId
+        })
+        .then(res=> {
+        }).catch(resErr => console.log(resErr))
+      }
+      
     } catch (error) {
       console.log(error)
       // handle error
     }
-
-    // console.log(myData)
-    // try{
-    //   if(!id){
-    //     const response=await axios.post('/Movies/PostMovie', 
-    //       {title : myData.title , releaseDate : myData.releaseDate , genreId : myData.genreId , directorId :  myData.directorId , ratingId : myData.ratingId});
-    //       setSuccess(true);
-    //   }else{
-    //     const response = await axios.put(`/Movies/UpdateMovie/${id}`, 
-    //     {
-    //       title: myData.title,
-    //       releaseDate: myData.releaseDate,
-    //       directorId: myData.directorId,
-    //       genreId: myData.genreId,
-    //       ratingId: myData.ratingId
-    //     })
-    //       .then(response => {
-    //         console.log(response.data);
-    //       })
-    //       .catch(error => {
-    //         console.error(error);
-    //       });
-    //   }
-
-    // }catch(err){
-    //     if(!err?.response){
-    //         setErrMsg('No Server Response')
-    //     }
-    //     else {
-    //         setErrMsg('Adding Movie Failed');
-    //     }
-    // }
-
-
-    // navigate('/movies')
+    
   }
 
 
@@ -245,14 +205,21 @@ const MovieForm = () => {
           </option>
         ))}
       </select>
-      <label htmlFor="images">Images:</label>
-      <input
-        type="file"
-        id="images"
-        accept="image/*"
-        multiple
-        onChange={handleFileChange2}
-      />
+      {
+        !id ? 
+          (<>
+            <label htmlFor="images">Images:</label>
+            <input
+              type="file"
+              id="images"
+              accept="image/*"
+              multiple
+              onChange={handleFileChange2}
+            />
+          </>)
+         : null
+      }
+      
       <button disabled={false}>{id ? "Update" : "Add"}</button>
     </form>
   )
