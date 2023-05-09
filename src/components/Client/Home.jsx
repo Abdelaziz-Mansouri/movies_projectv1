@@ -1,6 +1,5 @@
 import React from 'react'
 import '../../index.css'
-import styles from '../../style'
 import Header from './Header'
 import MovieGroup from './MovieGroup'
 import LatestGroup from './LatestGroup'
