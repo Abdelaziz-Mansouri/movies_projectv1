@@ -1,13 +1,10 @@
 import React from 'react'
-import { Genre1 } from '../../assets/genrePictures'
+import {Genre1} from './../../assets/genrePictures'
 
-const GenrePicture = () => {
+const GenrePicture = (props) => {
   return (
-    <div className='bg-cover h-[436px] min-w-[1174px] rounded-[24px] relative' style={{ backgroundImage: `url(${Genre1})`}}>
-        <div className="w-[calc(100%-36px)] h-[123px] absolute bottom-[21px] left-[18px] rounded-[24px] backdrop-blur-sm px-[33px] py-[23px]">
-            <h1 className='font-extrabold text-white text-[42px] leading-[51px]'>Genre Title</h1>
-            <p className='font-light text-white text-[24px] leading-[29px]'>Genre Info</p>
-        </div>
+    <div className='min-w-[273px] h-[356px] bg-cover rounded-[20px] flex flex-col justify-end pb-[45px]' style={{ backgroundImage: `url(${Genre1})`}}>
+      <h2 className='text-white text-center font-bold text-[31px] leading-[38px] '>{props.name}</h2>
     </div>
   )
 }
