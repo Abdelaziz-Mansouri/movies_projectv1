@@ -2,7 +2,7 @@ import React from 'react'
 import {Genre1} from '../../assets/genrePictures'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlay} from '@fortawesome/free-solid-svg-icons'
-
+import { Link } from 'react-router-dom';
 
 const MoviePicture = (props) => {
   return (
@@ -14,6 +14,8 @@ const MoviePicture = (props) => {
         <div className="absolute inset-x-[17px] bottom-[24px] h-[55px] text-white">
           <h3 className='leading-[23px] font-extrabold text-[19px]'>{props.title}</h3>
           <div className='leading-[15px] mt-[7px] font-light text-[12px] flex gap-[30px]'><span>{props.nameGenre}</span><span>{props.releaseDate}</span><span>{props.nameRating}</span></div>
+        </div>
+        <div className="absolute inset-x-[17px] bottom-[-20px] h-[55px] text-white">
         </div>
       </div>
     </div>

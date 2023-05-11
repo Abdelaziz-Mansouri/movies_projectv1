@@ -16,6 +16,7 @@ import CastList from './Admin/CastList';
 import CastForm from './Admin/CastForm';
 
 import Home from './Client/Home';
+import ImageEdit from './Admin/ImageEdit';
 
 const Nav = () => {
   return (
@@ -42,6 +43,7 @@ const Nav = () => {
         <Route exact path="/casts" element={<CastList/>} />
         <Route exact path="/casts/new" element={<CastForm/>} />
         <Route exact path="/casts/:id" element={<CastForm/>} />
+        <Route exact path="/imageUpdate/:id" element={<ImageEdit/>} />
         {/* Client */}
         <Route exact path="/home" element={<Home/>} />
       </Routes>
