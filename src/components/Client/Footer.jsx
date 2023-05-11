@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import GenrePicture from './GenrePicture'
 import axios from '../../api/axios';
 import { facebook, instagram, twitter, youtube } from './../../assets/icons'
 
