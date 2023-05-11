@@ -13,14 +13,14 @@ const ImageEdit = () => {
 
     });
 
-
+    var cpt ;
     useEffect(() => {
         if (id) {
         const fetchData = async () => {
-            axios.get(`/Images/GetAllByMovie/${id}`)
+            axios.get(`/Images/GetAllImagesByteByMovie/${id}`)
             .then((response) => {
                 setImageEdit(response.data)
-                console.log(response.data);
+                cpt = response.data.length ;
             })
             .catch((error) => {
                 // Handle the error
@@ -36,22 +36,25 @@ const ImageEdit = () => {
         setImageEdit({ ...imageEdit, images: e.target.file });
 
     };
-    return (
-        <div>
-            <form action="">
-            {
-            !id ? 
-            (<>
-                <label htmlFor="images">Images:</label>
+    console.log(cpt);
+    const inputElements = [];
+    for (let i=0 ; i < cpt ; i++){
+        inputElements.push(
+            <div key={i}>
                 <input
                 type="file"
-                id="images"
+                id={i}
                 accept="image/*"
                 onChange={handleFileChange2}
                 />
-            </>)
-            : null
-        }
+            </div>)
+    }
+    console.log(inputElements);
+    return (
+        <div>
+            <form action="">
+                <label htmlFor="images">Images:</label>
+                {inputElements}
             </form>
         </div>
     )

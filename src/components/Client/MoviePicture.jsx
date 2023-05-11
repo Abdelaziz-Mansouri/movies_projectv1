@@ -16,7 +16,7 @@ const MoviePicture = (props) => {
           <div className='leading-[15px] mt-[7px] font-light text-[12px] flex gap-[30px]'><span>{props.nameGenre}</span><span>{props.releaseDate}</span><span>{props.nameRating}</span></div>
         </div>
         <div className="absolute inset-x-[17px] bottom-[-20px] h-[55px] text-white">
-          <Link to={`/imageUpdate/${props.id}`}>Edit</Link>
+          {/* <Link to={`/movies/${props.id}`} >Edit</Link> */}
         </div>
       </div>
     </div>

@@ -28,6 +28,7 @@ const Nav = () => {
         <Route exact path="/movies" element={<MovieList/>} />
         <Route exact path="/movies/new" element={<MovieForm/>} />
         <Route exact path="/movies/:id" element={<MovieForm/>} />
+        <Route exact path="/updateImage/:id" element={<ImageEdit/>} />
         <Route exact path="/genres" element={<GenreList/>} />
         <Route exact path="/genres/new" element={<GenreForm/>} />
         <Route exact path="/genres/:id" element={<GenreForm/>} />
@@ -43,7 +44,6 @@ const Nav = () => {
         <Route exact path="/casts" element={<CastList/>} />
         <Route exact path="/casts/new" element={<CastForm/>} />
         <Route exact path="/casts/:id" element={<CastForm/>} />
-        <Route exact path="/imageUpdate/:id" element={<ImageEdit/>} />
         {/* Client */}
         <Route exact path="/home" element={<Home/>} />
       </Routes>

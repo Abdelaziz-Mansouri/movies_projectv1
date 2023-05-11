@@ -58,6 +58,7 @@ const MovieList = () => {
               <td>{movie.nameRating}</td>
               <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
               <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
+              <td><Link to={`/updateImage/${movie.id}`} >EditImage</Link></td>
             </tr>
           ))}
         </tbody>
