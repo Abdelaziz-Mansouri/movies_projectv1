@@ -4,7 +4,6 @@ import { useNavigate , useParams } from 'react-router-dom'
 import axios from '../../api/axios'
 
 
-
 const ImageEdit = () => {
 
     const navigate = useNavigate();
@@ -13,14 +12,13 @@ const ImageEdit = () => {
 
     });
 
-    var cpt ;
+    const urlImage = 'https://192.168.1.11:5020/Resources/';
     useEffect(() => {
         if (id) {
         const fetchData = async () => {
-            axios.get(`/Images/GetAllImagesByteByMovie/${id}`)
+            axios.get(`/Images/GetAllImagesByMovie/${id}`)
             .then((response) => {
                 setImageEdit(response.data)
-                cpt = response.data.length ;
             })
             .catch((error) => {
                 // Handle the error
@@ -36,11 +34,24 @@ const ImageEdit = () => {
         setImageEdit({ ...imageEdit, images: e.target.file });
 
     };
-    console.log(cpt);
+
+    let cpt =imageEdit.length;
     const inputElements = [];
+    
+    let img_1=[] ;
+
+    
     for (let i=0 ; i < cpt ; i++){
+        imageEdit.map(img => {
+            img_1.push({
+                name : img.name,
+                id : img.id,
+                movieId : img.movieId
+            });
+        })
         inputElements.push(
-            <div key={i}>
+            <div key={img_1[i].id}>
+                <img src={urlImage+img_1[i].name} alt={`${img_1[i].id}`}/>
                 <input
                 type="file"
                 id={i}
