@@ -9,7 +9,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 import years from '../../api/years';
 
-const MovieGroup = () => {
+const MovieGroup = ({propVal}) => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -52,9 +52,15 @@ const MovieGroup = () => {
   const [selectedOption, setSelectedOption] = useState("All");
   const [selectedYear, setSelectedYear] = useState("All");
 
+  
+
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   }
+
+  useEffect(() => {
+    setSelectedOption(propVal);
+  },[propVal])
 
   const filterData = () => {
     if (selectedOption == "All") {
@@ -92,7 +98,7 @@ const MovieGroup = () => {
               <option className='bg-[#4F4F4F]'>{year}</option>
             ))}
           </select>
-          <select onChange={handleChange} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
+          <select onChange={handleChange} value={selectedOption} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
             <option value='All' className='bg-[#4F4F4F]'>By Genre</option>
             {genres.map(genre => (
               <option className='bg-[#4F4F4F]'>{genre.name}</option>
