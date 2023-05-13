@@ -8,8 +8,12 @@ const ImageEdit = () => {
 
     const navigate = useNavigate();
     const {id} = useParams();
-    const [imageEdit , setImageEdit] = useState({
+    const [imageEdit , setImageEdit] = useState({});
 
+    const [imageEdited , setImageEdited]= useState({
+        Id: '',
+        MovieId : '',
+        Image : []
     });
 
     const urlImage = 'https://192.168.1.11:5020/Resources/';
@@ -29,10 +33,11 @@ const ImageEdit = () => {
         }
     }, [id])
 
-    const handleFileChange2 = (e) => {
-
-        setImageEdit({ ...imageEdit, images: e.target.file });
-
+    let files=[];
+    const handleFileChange = (e) => {
+        files.push(e.target.files);
+        setImageEdited({ ...imageEdited, Image: files });
+        console.log(imageEdited.Image);
     };
 
     let cpt =imageEdit.length;
@@ -40,7 +45,26 @@ const ImageEdit = () => {
     
     let img_1=[] ;
 
-    
+    const handleSubmit=async (idImg , idMovie)=>{
+
+        const formData = new FormData();
+        formData.append("Id", idImg);
+        formData.append("MovieId", idMovie);
+
+        Array.from(imageEdited.Image[0]).forEach((image) => {
+            formData.append('Image', image);
+        })
+        for (let entry of formData.entries()) {
+            console.log(entry);
+        }
+
+        await axios.put(`/Images/UpdateMovieImage/${idImg}`, formData , {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }).then((response) => { console.log(response) });
+    }
+
     for (let i=0 ; i < cpt ; i++){
         imageEdit.map(img => {
             img_1.push({
@@ -50,17 +74,23 @@ const ImageEdit = () => {
             });
         })
         inputElements.push(
-            <div key={img_1[i].id}>
+            <div key={img_1[i].id} id={img_1[i].id}>
                 <img src={urlImage+img_1[i].name} alt={`${img_1[i].id}`}/>
                 <input
                 type="file"
                 id={i}
                 accept="image/*"
-                onChange={handleFileChange2}
+                onChange={handleFileChange}
                 />
-            </div>)
+                <div>
+                    <h1>{img_1[i].id}</h1>
+                    <h1>{img_1[i].movieId}</h1>
+                </div>
+                <button onClick={(e) => {e.preventDefault(); handleSubmit( img_1[i].id, img_1[i].movieId ) }}>Update</button>
+            </div>
+        )
     }
-    console.log(inputElements);
+
     return (
         <div>
             <form action="">
