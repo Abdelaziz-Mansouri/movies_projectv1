@@ -14,7 +14,8 @@ const MoviePicture = (props) => {
           <h3 className='leading-[23px] font-extrabold text-[19px]'>{props.title}</h3>
           <div className='leading-[15px] mt-[7px] font-light text-[12px] flex gap-[30px]'><span>{props.nameGenre}</span><span>{props.releaseDate}</span><span>{props.nameRating}</span></div>
         </div>
-        <div className="absolute inset-x-[17px] bottom-[-20px] h-[55px] text-white">
+        <div className="absolute inset-x-[17px] bottom-[-2px] h-[55px] text-white">
+          <h1>{props.imageUrl}</h1>
         </div>
       </div>
     </div>

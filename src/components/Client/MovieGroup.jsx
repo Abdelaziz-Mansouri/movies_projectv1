@@ -13,7 +13,10 @@ const MovieGroup = ({propVal}) => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+  
+  const [imageEdit , setImageEdit] = useState([]);
 
+  const urlImage = 'https://192.168.1.11:5020/Resources/';
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {
@@ -29,10 +32,17 @@ const MovieGroup = ({propVal}) => {
         setGenres(response.data);
         console.log(response);
       })
-      .catch(err => console.log(err))
-
+    .catch(err => console.log(err));
   }, []);
-
+  const showingImage = (id)=>{
+    axios.get(`/Images/GetAllImagesByMovie/${id}`)
+    .then((response) => {
+        setImageEdit(response.data)
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+  }
   const moviesContainer = useRef();
 
   const showMore = (e) => {
@@ -85,7 +95,14 @@ const MovieGroup = ({propVal}) => {
   };
 
   const filteredYear = filterYear();
+  const showingMovie= () =>{
 
+    let imagePoster=[];
+
+    filteredYear.map(movie => ( 
+      <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} imageUrl={urlImage+movie.name} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
+    ))
+  }
 
   return (
     <div className='my-[80px] mx-[220px]'>
@@ -111,9 +128,7 @@ const MovieGroup = ({propVal}) => {
 
       </div>
       <div className="flex mt-[73px] gap-[115px] justify-center flex-wrap max-h-[1160px] overflow-hidden" ref={moviesContainer}>
-        {filteredYear.map(movie => (
-          <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
-        ))}
+        
       </div>
       <div className={filteredYear.length > 6 ? 'flex justify-center mt-[45px]' : 'hidden'}>
         <button className={styles.btnPrimary}><span onClick={showMore}>Show more</span> <FontAwesomeIcon icon={faChevronDown} /></button>
