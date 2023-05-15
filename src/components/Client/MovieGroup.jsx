@@ -59,10 +59,14 @@ const MovieGroup = ({propVal}) => {
   }
 
   useEffect(() => {
-    setSelectedOption(propVal);
+    if (propVal){
+      setSelectedOption(propVal)
+    }
   },[propVal])
 
   const filterData = () => {
+    console.log(selectedOption);
+
     if (selectedOption == "All") {
       return movies;
     } else {
@@ -77,6 +81,8 @@ const MovieGroup = ({propVal}) => {
   }
 
   const filterYear = () => {
+    console.log(selectedYear);
+
     if (selectedYear == "All") {
       return filteredData;
     } else {
@@ -85,14 +91,14 @@ const MovieGroup = ({propVal}) => {
   };
 
   const filteredYear = filterYear();
-
+  filterYear()
 
   return (
     <div className='my-[80px] mx-[220px]'>
       <div className="h-[69px] w-full bg-secondary rounded-[20px] flex items-center px-[33px] justify-between">
         <h1 className='font-semibold text-white text-[32px]'>Popular</h1>
         <div className="relative inline-flex gap-[8px]">
-          <select onChange={handleChangeYear} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
+          <select onChange={handleChangeYear} value={selectedYear} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
             <option value='All' className='bg-[#4F4F4F]'>By Year</option>
             {years.years.map(year => (
               <option className='bg-[#4F4F4F]'>{year}</option>
