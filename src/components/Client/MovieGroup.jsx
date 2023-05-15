@@ -93,6 +93,12 @@ const MovieGroup = ({propVal}) => {
   const filteredYear = filterYear();
   filterYear()
 
+  const mov = () => (
+    filteredYear.map(movie => (
+      <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
+    ))
+  )
+
   return (
     <div className='my-[80px] mx-[220px]'>
       <div className="h-[69px] w-full bg-secondary rounded-[20px] flex items-center px-[33px] justify-between">
@@ -117,9 +123,7 @@ const MovieGroup = ({propVal}) => {
 
       </div>
       <div className="flex mt-[73px] gap-[115px] justify-center flex-wrap max-h-[1160px] overflow-hidden" ref={moviesContainer}>
-        {filteredYear.map(movie => (
-          <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
-        ))}
+        {mov()}
       </div>
       <div className={filteredYear.length > 6 ? 'flex justify-center mt-[45px]' : 'hidden'}>
         <button className={styles.btnPrimary}><span onClick={showMore}>Show more</span> <FontAwesomeIcon icon={faChevronDown} /></button>
