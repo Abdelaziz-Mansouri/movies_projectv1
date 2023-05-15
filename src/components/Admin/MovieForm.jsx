@@ -76,9 +76,6 @@ const MovieForm = () => {
 
   };
 
- 
-
-
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -118,6 +115,9 @@ const MovieForm = () => {
         Array.from(myData.images[0]).forEach((image) => {
           formData.append('images', image);
         })
+        for (let entry of formData.entries()) {
+          console.log(entry);
+        }
         await axios.post('/Movies/PostMovie', formData , {
           headers: {
             "Content-Type": "multipart/form-data",
