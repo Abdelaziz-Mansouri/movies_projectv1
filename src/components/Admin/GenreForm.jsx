@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react'
 import axios from '../../api/axios';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import styles from '../../style';
 
 const GenreForm = () => {
 
@@ -51,14 +52,17 @@ const GenreForm = () => {
 
   return (
     <>
-      <h1>GenreForm</h1>
-
-      <form>
-        <label htmlFor="">entrer le id du genre</label>
-        <input type="number" id='id' value={genre.id} onInput={(e) => {handleInput(e)}}/>
-        <label htmlFor="">entrer le name du genre</label>
-        <input type="text" value={genre.name} id='name' onInput={(e) => {handleInput(e)}}/>
-        <button onClick={(e) => {handleSubmit(e)}}>{!id ? 'Ajouter' : 'Update'}</button>
+      <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>GenreForm</h1>
+      
+      <form className="flex flex-wrap gap-[18px] w-[80%] justify-center">
+        <div className="flex w-full gap-[18px]">
+        <input placeholder='Id' className={styles.input + ' w-full'} type="number" id='id' value={genre.id} onInput={(e) => {handleInput(e)}}/>
+        <input placeholder='Genre name' className={styles.input + ' w-full'} type="text" value={genre.name} id='name' onInput={(e) => {handleInput(e)}}/>
+        </div>
+        <div className="flex justify-center w-full gap-[18px]">
+        <button className={styles.btnPrimary + ' w-full'} onClick={(e) => {handleSubmit(e)}}>{!id ? 'Ajouter' : 'Update'}</button>
+        <Link to='/genres' className={styles.btnSecondary + ' w-full'}>Ignore</Link>
+        </div>
       </form>
     
     </>

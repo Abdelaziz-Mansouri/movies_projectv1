@@ -1,17 +1,18 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from '../../api/axios';
-import { useNavigate , useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import styles from '../../style';
 
 const DirectorForm = () => {
 
   const navigate = useNavigate();
 
   const [director, setDirector] = useState({
-    id : '',
-    firstName : '',
-    lastName : ''
+    id: '',
+    firstName: '',
+    lastName: ''
   });
-  const {id} = useParams();
+  const { id } = useParams();
 
   const handleInput = (e) => {
     const newdirector = { ...director }
@@ -20,14 +21,14 @@ const DirectorForm = () => {
     console.log(newdirector);
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!id){
-      let response = await axios.post('/Directors/AddDirector', {id: director.id , firstName : director.firstName, lastName : director.lastName}).catch(err => console.log(err));
+    if (!id) {
+      let response = await axios.post('/Directors/AddDirector', { id: director.id, firstName: director.firstName, lastName: director.lastName }).catch(err => console.log(err));
       console.log(JSON.stringify(response));
-    }else{
-      let response = await axios.put(`/Directors/UpdateDirector/${id}`, {id: director.id , firstName : director.firstName, lastName : director.lastName}).catch(err => console.log(err));
+    } else {
+      let response = await axios.put(`/Directors/UpdateDirector/${id}`, { id: director.id, firstName: director.firstName, lastName: director.lastName }).catch(err => console.log(err));
       console.log(JSON.stringify(response));
     }
 
@@ -50,16 +51,16 @@ const DirectorForm = () => {
   }, [id])
   return (
     <>
-      <h1>DirectorForm</h1>
+      <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>Add Director</h1>
 
-      <form>
-        <label htmlFor="">entrer le id du directeur</label>
-        <input type="number" id='id' value={director.id} onInput={(e) => {handleInput(e)}}/>
-        <label htmlFor="">entrer le prenom du directeur</label>
-        <input type="text" id='firstName' value={director.firstName} onInput={(e) => {handleInput(e)}}/>
-        <label htmlFor="">entrer le nom du directeur</label>
-        <input type="text" id='lastName' value={director.lastName} onInput={(e) => {handleInput(e)}}/>
-        <button onClick={(e) => {handleSubmit(e)}}>{!id ? 'Ajouter' : 'Update'}</button>
+      <form className="flex flex-wrap gap-[18px] w-[80%] justify-center">
+        <input className={styles.input + ' w-full'} placeholder='Id' type="number" id='id' value={director.id} onInput={(e) => { handleInput(e) }} />
+        <input className={styles.input + ' w-full'} placeholder='First Name' type="text" id='firstName' value={director.firstName} onInput={(e) => { handleInput(e) }} />
+        <input className={styles.input + ' w-full'} placeholder='Last Name' type="text" id='lastName' value={director.lastName} onInput={(e) => { handleInput(e) }} />
+        <div className="w-full flex justify-center gap-[18px]">
+          <button className={styles.btnPrimary + ' w-[20%]'} onClick={(e) => { handleSubmit(e) }}>{!id ? 'Ajouter' : 'Update'}</button>
+          <Link to='/directors' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+        </div>
       </form>
     </>
   )

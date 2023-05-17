@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import styles from '../../style';
 import axios from '../../api/axios';
 
 const ActorForm = () => {
@@ -50,16 +51,16 @@ const ActorForm = () => {
 
   return (
     <>
-      <h1>ActorForm</h1>
+      <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>Add Actor</h1>
 
-      <form>
-        <label htmlFor="">entrer le id d'actor</label>
-        <input type="number" id='id' value={actor.id} onInput={(e) => { handleInput(e) }} />
-        <label htmlFor="">entrer le prenom d'actor</label>
-        <input type="text" id='firstName' value={actor.firstName} onInput={(e) => { handleInput(e) }} />
-        <label htmlFor="">entrer le nom d'actor</label>
-        <input type="text" id='lastName' value={actor.lastName} onInput={(e) => { handleInput(e) }} />
-        <button onClick={(e) => { handleSubmit(e) }}>{id ? 'Modifier' : 'Ajouter'}</button>
+      <form className="flex flex-wrap gap-[18px] w-[80%] justify-center">
+        <input className={styles.input + ' w-full'} placeholder='Id' type="number" id='id' value={actor.id} onInput={(e) => { handleInput(e) }} />
+        <input className={styles.input + ' w-full'} placeholder='First Name' type="text" id='firstName' value={actor.firstName} onInput={(e) => { handleInput(e) }} />
+        <input className={styles.input + ' w-full'} placeholder='Last Name' type="text" id='lastName' value={actor.lastName} onInput={(e) => { handleInput(e) }} />
+        <div className="w-full flex justify-center gap-[18px]">
+          <button className={styles.btnPrimary + ' w-[20%]'} onClick={(e) => { handleSubmit(e) }}>{!id ? 'Ajouter' : 'Update'}</button>
+          <Link to='/actors' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+        </div>
       </form>
     </>
   )

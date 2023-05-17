@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import { Link } from 'react-router-dom';
+import TableCadre from './TableCadre';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 const ActorList = () => {
 
@@ -29,34 +33,30 @@ const ActorList = () => {
   }
 
   return (
-    <>
-      <h1>Actors List</h1>
-      <table>
-        <thead>
-          <tr>
+
+      <TableCadre
+        listName='Actors'
+        addButton='Actor'
+        linkNew='/actors/new'
+        head={
+          <>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {actors.map((actor) => (
-            <tr key={actor.id}>
-              <td>{actor.firstName}</td>
+          </>
+        }
+        body={
+          <>
+            {actors.map((actor) => (
+            <tr key={actor.id} className='bg-secondary '>
+              <td className='p-[20px]'>{actor.firstName}</td>
               <td>{actor.lastName}</td>
-              <td><Link to={`/actors/${actor.id}`}>Edit</Link></td>
-              <td><button onClick={() => deleteActor(actor.id)}>Delete</button></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/actors/${actor.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteActor(actor.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
             </tr>
           ))}
-          <tr>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <Link to="/actors/new">Add Actor</Link>
-    </>
+          </>
+        }
+      />
   )
 }
 

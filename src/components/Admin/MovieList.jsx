@@ -2,13 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faImages } from '@fortawesome/free-solid-svg-icons'
+
+import TableCadre from './TableCadre';
+
 
 
 const MovieList = () => {
 
   const [movies, setMovies] = useState([]);
 
-  
+
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {
@@ -18,9 +25,9 @@ const MovieList = () => {
       .catch(error => {
         console.log(error);
       });
-    
+
   }, []);
-  
+
   const deleteMovie = (id) => {
     axios.delete(`/Movies/DeleteMovie/${id}`)
       .then(response => {
@@ -33,38 +40,37 @@ const MovieList = () => {
   }
 
   return (
-    <>
-      <h1>MovieList</h1>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Genre</th>
-            <th>Director</th>
-            <th>Rating</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
+    <TableCadre
+      listName='Movies'
+      addButton='Movie'
+      linkNew='/movies/new'
+      head={
+        <>
+          <th className='p-[10px]'>Title</th>
+          <th>Release Date</th>
+          <th>Genre</th>
+          <th>Director</th>
+          <th>Rating</th>
+        </>
+      }
+      image={true}
+      body={
+        <>
           {movies.map(movie => (
-            <tr key={movie.id}>
-              <td>{movie.title}</td>
-              <td>{movie.releaseDate}</td>
+            <tr key={movie.id} className='bg-secondary '>
+              <td className='p-[20px]'>{movie.title}</td>
+              <td>{movie.releaseDate.slice(0,10)}</td>
               <td>{movie.nameGenre}</td>
               <td>{movie.lastName} {movie.fistName}</td>
               <td>{movie.nameRating}</td>
-              <td><Link to={`/movies/${movie.id}`}>Edit</Link></td>
-              <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
-              <td><Link to={`/updateImage/${movie.id}`} >EditImage</Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/movies/${movie.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteMovie(movie.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/updateImage/${movie.id}`}><FontAwesomeIcon icon={faImages} /></Link></td>
             </tr>
           ))}
-        </tbody>
-      </table>
-      <Link to="/movies/new">Add Movie</Link>
-    </>
+        </>
+      }
+    />
   )
 }
 

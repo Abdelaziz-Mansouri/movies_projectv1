@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import styles from '../../style';
 import axios from '../../api/axios';
 
 const CastForm = () => {
@@ -72,22 +73,22 @@ const CastForm = () => {
 
   return (
     <>
-      <h1>CastForm</h1>
+      <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>Add Cast</h1>
 
-      <form>
-        <label htmlFor="">entrer le id de cast</label>
-        <input type="number" id='id' value={cast.id} onInput={(e) => { handleInput(e) }} />
-        <label htmlFor="">entrer le nom de character</label>
-        <input type="text" id='characterName' value={cast.characterName} onInput={(e) => { handleInput(e) }} />
-        <label htmlFor="">select movie</label>
-        <select name="" id="movieId" value={cast.movieId}  onInput={(e) => { handleInput(e) }}>
+      <form className="flex flex-wrap gap-[18px] w-[80%] justify-center">
+        <input className={styles.input + ' w-full'} placeholder='Id' type="number" id='id' value={cast.id} onInput={(e) => { handleInput(e) }} />
+        <input className={styles.input + ' w-full'} placeholder='Character Name' type="text" id='characterName' value={cast.characterName} onInput={(e) => { handleInput(e) }} />
+        <select className={styles.input + ' w-full'} placeholder='Movie' name="" id="movieId" value={cast.movieId}  onInput={(e) => { handleInput(e) }}>
           {movies.map(movie => (<option value={movie.id} key={movie.id}>{movie.title}</option>))}
         </select>
-        <label htmlFor="">select actor</label>
-        <select name="" id="actorId" value={cast.actorId} onInput={(e) => { handleInput(e) }}>
+        <select className={styles.input + ' w-full'} placeholder='Actor' name="" id="actorId" value={cast.actorId} onInput={(e) => { handleInput(e) }}>
           {actors.map(actor => (<option value={actor.id} key={actor.id}>{actor.firstName + actor.lastName}</option>))}
         </select>
-        <button onClick={(e) => { handleSubmit(e) }}>{id ? 'Modifier' : 'Ajouter'}</button>
+        <div className="w-full flex justify-center gap-[18px]">
+
+        <button className={styles.btnPrimary + ' w-[20%]'} onClick={(e) => { handleSubmit(e) }}>{id ? 'Modifier' : 'Ajouter'}</button>
+          <Link to='/casts' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+        </div>
       </form>
     </>
   )
