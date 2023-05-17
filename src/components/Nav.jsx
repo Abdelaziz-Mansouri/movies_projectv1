@@ -23,7 +23,7 @@ const Nav = () => {
     <Router>
       <div className="flex">
         <Navigation />
-        <div className="relative left-[400px]">
+        <div className="relative left-[400px] max-w-[calc(100vw-400px)]">
         <Routes>
           {/* Admin */}
           <Route exact path="/" element={<MovieList />} />

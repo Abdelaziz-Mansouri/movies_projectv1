@@ -11,7 +11,7 @@ function Navigation() {
     }
   }
   return (
-    <div className='w-[337px] bg-[#272424] text-white h-[100vh] py-[70px] fixed'>
+    <div className='w-[337px] bg-[#272424] text-white h-[100vh] py-[70px] fixed z-10'>
       <div className="flex items-center mb-[115px]">
             <div className="rounded-full bg-primary w-[48px] h-[48px] ml-[60px] mr-[8px]"></div>
             <h1 className='text-[22px] leading-[27px]'>Logo</h1>

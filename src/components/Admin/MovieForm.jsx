@@ -1,9 +1,8 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import axios from '../../api/axios';
-import { useParams } from 'react-router-dom';
-
+import styles from '../../style';
 const MovieForm = () => {
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ const MovieForm = () => {
 
   const { id } = useParams();
 
-  
+
 
   const [selectedOptionDirector, setselectedOptionDirector] = useState([]);
   const [selectedOptionGenre, setselectedOptionGenre] = useState([]);
@@ -96,14 +95,14 @@ const MovieForm = () => {
 
   const handleSubmit = async (e) => {
 
-    
+
     e.preventDefault();
 
 
 
 
     try {
-      if(!id){
+      if (!id) {
         const formData = new FormData();
         formData.append("id", myData.id);
         formData.append("title", myData.title);
@@ -118,109 +117,122 @@ const MovieForm = () => {
         for (let entry of formData.entries()) {
           console.log(entry);
         }
-        await axios.post('/Movies/PostMovie', formData , {
+        await axios.post('/Movies/PostMovie', formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         }).then((response) => { console.log(response) });
-      
+
         // handle success
-      }else{
-        const response = await axios.put(`/Movies/UpdateMovie/${id}`, 
-        {
-          id : id,
-          title: myData.title,
-          releaseDate: myData.releaseDate,
-          directorId: myData.directorId,
-          genreId: myData.genreId,
-          ratingId: myData.ratingId
-        })
-        .then(res=> {
-        }).catch(resErr => console.log(resErr))
+      } else {
+        const response = await axios.put(`/Movies/UpdateMovie/${id}`,
+          {
+            id: id,
+            title: myData.title,
+            releaseDate: myData.releaseDate,
+            directorId: myData.directorId,
+            genreId: myData.genreId,
+            ratingId: myData.ratingId
+          })
+          .then(res => {
+          }).catch(resErr => console.log(resErr))
       }
-      
+
     } catch (error) {
       console.log(error)
       // handle error
     }
-    
+
   }
 
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="title">
-        Title:
-      </label>
-      <input
-        type="text"
-        id="title"
-        autoComplete="off"
-        onChange={handlechangeTitle}
-        value={myData.title}
-        required
-      />
+      <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>Add Movie</h1>
+      <h2 className='font-bold text-[25px] mb-[10px]'>Movies title and description</h2>
+      <div className="flex flex-wrap gap-[18px] w-[80%] justify-center">
+        <input
+          type="text"
+          id="title"
+          autoComplete="off"
+          onChange={handlechangeTitle}
+          value={myData.title}
+          required
+          className={styles.input + ' w-full'}
+          placeholder='Title'
+        />
 
-      <label htmlFor="releaseDate">
-        Release Date:
-      </label>
-      <input
-        type="datetime-local"
-        id="releaseDate"
-        onChange={handleChangeDate}
-        value={myData.releaseDate}
-        required
-      />
 
-      <label htmlFor="director">
-        Director:
-      </label>
-      <select value={myData.directorId} onChange={handleSelectChangeDirector}>
-        <option>--select--</option>
-        {selectedOptionDirector.map(option => (
-          <option key={option.id} value={option.id}>
-            {`${option.firstName} ${option.lastName}`}
-          </option>
-        ))}
-      </select>
+        <div className="flex w-full gap-[18px]">
+          <select value={myData.directorId} onChange={handleSelectChangeDirector}
+            className={styles.input + ' w-full'}
+          >
+            <option>--select director--</option>
+            {selectedOptionDirector.map(option => (
+              <option key={option.id} value={option.id}>
+                {`${option.firstName} ${option.lastName}`}
+              </option>
+            ))}
+          </select>
 
-      <label >
-        Genre:
-      </label>
-      <select value={myData.genreId} onChange={handleSelectChangeGenre}>
-        <option>--select--</option>
-        {selectedOptionGenre.map(option => (
-          <option key={option.id} value={option.id}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-      <label >
-        Rating:
-      </label>
-      <select value={myData.ratingId} onChange={handleSelectChangeRating} >
-        {selectedOptionRating.map(option => (
-          <option key={option.id} value={option.id}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-      {
-        !id ? 
+          <select value={myData.genreId} onChange={handleSelectChangeGenre}
+            className={styles.input + ' w-full'}
+          >
+            <option>--select genre--</option>
+            {selectedOptionGenre.map(option => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex w-full gap-[18px]">
+          <input
+          type="datetime-local"
+          id="releaseDate"
+          onChange={handleChangeDate}
+          value={myData.releaseDate}
+          required
+          className={styles.input + ' w-full'}
+        />
+
+        <select value={myData.ratingId} onChange={handleSelectChangeRating}
+          className={styles.input + ' w-full'}
+        >
+          {selectedOptionRating.map(option => (
+            <option key={option.id} value={option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        </div>
+
+        {
+        !id ?
           (<>
-            <label htmlFor="images">Images:</label>
+
             <input
               type="file"
               id="images"
               accept="image/*"
               multiple
               onChange={handleFileChange2}
+              className={styles.input + ' w-full'}
             />
           </>)
-         : null
+          : null
       }
+      <div className="w-full flex justify-center gap-[18px]">
+
+      <button disabled={false} className={styles.btnPrimary + ' w-[20%]'}>{id ? "Update" : "Add"}</button>
+      <Link to='/movies' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+
+      </div>
+        
+      </div>
       
-      <button disabled={false}>{id ? "Update" : "Add"}</button>
+
     </form>
   )
 }

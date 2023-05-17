@@ -19,7 +19,7 @@ const TableCadre = (props) => {
                         {props.image ? <th>EditImage</th> : null}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='text-white'>
                     {props.body}
                 </tbody>
             </table>
