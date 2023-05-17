@@ -3,6 +3,8 @@ import axios from '../../api/axios';
 
 import MoviePicture from './MoviePicture'
 import styles from '../../style';
+import {Genre1} from '../../assets/genrePictures'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +17,13 @@ const MovieGroup = ({propVal}) => {
   const [genres, setGenres] = useState([]);
   
   const [imageEdit , setImageEdit] = useState([]);
+  const [imageFetched, setImageFetched] = useState(false);
 
-  const urlImage = 'https://192.168.1.11:5020/Resources/';
+  const urlImage = 'https://192.168.1.17:5020/Resources/';
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {
         setMovies(response.data);
-        console.log(response);
       })
       .catch(error => {
         console.log(error);
@@ -30,19 +32,27 @@ const MovieGroup = ({propVal}) => {
     axios.get('/Genres')
       .then((response) => {
         setGenres(response.data);
-        console.log(response);
       })
     .catch(err => console.log(err));
   }, []);
   const showingImage = (id)=>{
-    axios.get(`/Images/GetAllImagesByMovie/${id}`)
-    .then((response) => {
-        setImageEdit(response.data)
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+    if(id !== undefined && !imageFetched){
+      axios.get(`/Images/GetAllImagesByMovie/${id}`)
+      .then((response) => {
+        
+          setImageEdit(...imageEdit, response.data)
+          // console.log(response.data);
+      })
+      .catch((error) => {
+          console.error('Hello'+error);
+      })
+      .finally(() => {
+        setImageFetched(true); // Set the flag to indicate images have been fetched
+      });
+    }
+    
   }
+  
   const moviesContainer = useRef();
 
   const showMore = (e) => {
@@ -63,16 +73,19 @@ const MovieGroup = ({propVal}) => {
   const [selectedYear, setSelectedYear] = useState("All");
 
   
-
+  console.log(imageEdit);
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   }
 
   useEffect(() => {
-    setSelectedOption(propVal);
+    if (propVal){
+      setSelectedOption(propVal)
+    }
   },[propVal])
 
-  const filterData = () => {
+  const filterData = () => {;
+
     if (selectedOption == "All") {
       return movies;
     } else {
@@ -86,7 +99,8 @@ const MovieGroup = ({propVal}) => {
     setSelectedYear(e.target.value);
   }
 
-  const filterYear = () => {
+  const filterYear = () => {;
+
     if (selectedYear == "All") {
       return filteredData;
     } else {
@@ -95,21 +109,25 @@ const MovieGroup = ({propVal}) => {
   };
 
   const filteredYear = filterYear();
-  const showingMovie= () =>{
-
-    let imagePoster=[];
-
-    filteredYear.map(movie => ( 
-      <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} imageUrl={urlImage+movie.name} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
-    ))
-  }
+  filterYear()
+  
+  const mov = () => (
+    filteredYear.map((movie , index) => {
+      showingImage(movie.id)
+      console.log(imageEdit[index]);
+      const image = (imageEdit[index]?.name ?  urlImage + imageEdit[index]?.name : null);
+      return(
+        <MoviePicture key={movie.id} id={movie.id} title={movie.title}  nameGenre={movie.nameGenre} imageUrl={image ? image : Genre1} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
+        )
+      })
+  )
 
   return (
     <div className='my-[80px] mx-[220px]'>
       <div className="h-[69px] w-full bg-secondary rounded-[20px] flex items-center px-[33px] justify-between">
         <h1 className='font-semibold text-white text-[32px]'>Popular</h1>
         <div className="relative inline-flex gap-[8px]">
-          <select onChange={handleChangeYear} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
+          <select onChange={handleChangeYear} value={selectedYear} className="appearance-none bg-primary text-white border rounded-[10px] px-4 py-2 pr-8 leading-tight focus:outline-none focus:border-gray-500">
             <option value='All' className='bg-[#4F4F4F]'>By Year</option>
             {years.years.map(year => (
               <option className='bg-[#4F4F4F]'>{year}</option>
@@ -128,7 +146,7 @@ const MovieGroup = ({propVal}) => {
 
       </div>
       <div className="flex mt-[73px] gap-[115px] justify-center flex-wrap max-h-[1160px] overflow-hidden" ref={moviesContainer}>
-        
+        {mov()}
       </div>
       <div className={filteredYear.length > 6 ? 'flex justify-center mt-[45px]' : 'hidden'}>
         <button className={styles.btnPrimary}><span onClick={showMore}>Show more</span> <FontAwesomeIcon icon={faChevronDown} /></button>

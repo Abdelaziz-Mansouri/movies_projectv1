@@ -10,7 +10,6 @@ const GenreGroup = ({propVal,handleClick}) => {
     axios.get('/Genres')
       .then((response) => {
         setGenres(response.data);
-        console.log(response);
       })
       .catch(err => console.log(err))
   }, [])
