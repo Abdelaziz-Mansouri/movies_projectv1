@@ -39,12 +39,10 @@ const MovieGroup = ({propVal}) => {
     if(id !== undefined && !imageFetched){
       axios.get(`/Images/GetAllImagesByMovie/${id}`)
       .then((response) => {
-        
-          setImageEdit(...imageEdit, response.data)
-          // console.log(response.data);
+          setImageEdit(...imageEdit ,response.data)
       })
       .catch((error) => {
-          console.error('Hello'+error);
+          console.error(error);
       })
       .finally(() => {
         setImageFetched(true); // Set the flag to indicate images have been fetched
@@ -114,7 +112,7 @@ const MovieGroup = ({propVal}) => {
   const mov = () => (
     filteredYear.map((movie , index) => {
       showingImage(movie.id)
-      console.log(imageEdit[index]);
+      console.log(imageEdit[index]?.name);
       const image = (imageEdit[index]?.name ?  urlImage + imageEdit[index]?.name : null);
       return(
         <MoviePicture key={movie.id} id={movie.id} title={movie.title}  nameGenre={movie.nameGenre} imageUrl={image ? image : Genre1} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
