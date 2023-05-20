@@ -19,12 +19,13 @@ import Home from './Client/Home';
 import ImageEdit from './Admin/ImageEdit';
 
 import Register from './Client/Login_Register/Register';
+import Login from './Client/Login_Register/Login';
 
 const Nav = () => {
   return (
-    <Router>
+    <>
       {
-        false ? (
+        true ? (
           <div className="flex">
         <Navigation />
         <div className="relative left-[400px] max-w-[calc(100vw-400px)]">
@@ -51,8 +52,6 @@ const Nav = () => {
           <Route exact path="/casts/new" element={<CastForm />} />
           <Route exact path="/casts/:id" element={<CastForm />} />
           {/* Client */}
-          <Route exact path="/hello" element={<Home />} />
-          <Route exact path="/register" element={<Register />} />
         </Routes>
         </div>
         
@@ -60,7 +59,7 @@ const Nav = () => {
         ) : 'hello'
       }
       
-    </Router>
+    </>
   )
 }
 

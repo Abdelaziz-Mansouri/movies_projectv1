@@ -1,19 +1,11 @@
 import React from 'react';
-import Nav from './components/Nav';
-import Home from './components/Client/Home';
+import LoginRegister from './components/Client/Login_Register/LoginRegister.jsx';
 
 
-function App() {
-  if (window.location.pathname != '/home') {
-    return (
-      <Nav/>
-    )
-  }else{
-    return(
-      <Home/>
-    )
-  }
-  
+const App = () => {
+  return (
+    <LoginRegister/>
+  )
 }
 
 export default App;
