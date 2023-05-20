@@ -35,21 +35,7 @@ const MovieGroup = ({propVal}) => {
       })
     .catch(err => console.log(err));
   }, []);
-  const showingImage = (id)=>{
-    if(id !== undefined && !imageFetched){
-      axios.get(`/Images/GetAllImagesByMovie/${id}`)
-      .then((response) => {
-          setImageEdit(...imageEdit ,response.data)
-      })
-      .catch((error) => {
-          console.error(error);
-      })
-      .finally(() => {
-        setImageFetched(true); // Set the flag to indicate images have been fetched
-      });
-    }
-    
-  }
+  
   
   const moviesContainer = useRef();
 
@@ -111,11 +97,9 @@ const MovieGroup = ({propVal}) => {
   
   const mov = () => (
     filteredYear.map((movie , index) => {
-      showingImage(movie.id)
-      console.log(imageEdit[index]?.name);
-      const image = (imageEdit[index]?.name ?  urlImage + imageEdit[index]?.name : null);
+      console.log(movie.images[0].image);
       return(
-        <MoviePicture key={movie.id} id={movie.id} title={movie.title}  nameGenre={movie.nameGenre} imageUrl={image ? image : Genre1} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
+        <MoviePicture key={movie.id} id={movie.id} title={movie.title}  nameGenre={movie.nameGenre} imageUrl={movie.images[0].image ? urlImage + movie.images[0].image : Genre1} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
         )
       })
   )

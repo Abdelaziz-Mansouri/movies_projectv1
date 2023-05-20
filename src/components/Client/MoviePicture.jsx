@@ -1,5 +1,4 @@
 import React from 'react'
-import {Genre1} from '../../assets/genrePictures'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlay} from '@fortawesome/free-solid-svg-icons'
 

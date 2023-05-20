@@ -2,7 +2,7 @@ import React from 'react'
 import { useState , useEffect  } from 'react'
 import { useNavigate , useParams } from 'react-router-dom'
 import axios from '../../api/axios'
-
+import styles from '../../style'
 
 const ImageEdit = () => {
 
@@ -31,7 +31,7 @@ const ImageEdit = () => {
         }
         fetchData();
         }
-    }, [id])
+    })
 
     let files=[];
     const handleFileChange = (e) => {
@@ -74,29 +74,31 @@ const ImageEdit = () => {
             });
         })
         inputElements.push(
-            <div key={img_1[i].id} id={img_1[i].id}>
-                <img src={urlImage+img_1[i].name} alt={`${img_1[i].id}`}/>
-                <input
-                type="file"
-                id={i}
-                accept="image/*"
-                onChange={handleFileChange}
-                />
-                <div>
-                    <h1>{img_1[i].id}</h1>
-                    <h1>{img_1[i].movieId}</h1>
+            <div key={img_1[i].id} id={img_1[i].id} className='' >
+                <div className='w-[100%] h-[520px] rounded-[20px] bg-cover relative' style={{ backgroundImage: `url(${urlImage+img_1[i].name})`}}></div>
+                <div className='py-[10px]'>
+                    <input
+                    className={styles.input + ' w-full'}
+                    type="file"
+                    id={i}
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    />
                 </div>
-                <button onClick={(e) => {e.preventDefault(); handleSubmit( img_1[i].id, img_1[i].movieId ) }}>Update</button>
+                <div className='py-[10px]'>
+                    <button className={styles.btnPrimary + ' w-full'} onClick={(e) => {e.preventDefault(); handleSubmit( img_1[i].id, img_1[i].movieId ) }}>Update</button>
+                </div>
+                
             </div>
         )
     }
 
     return (
-        <div>
-            <form action="">
-                <label htmlFor="images">Images:</label>
+        <div className='w-full'>
+            <h1 className='font-bold text-[33px] mt-[38px] mb-[60px] leading-[40px] relative -left-[20px]'>Images</h1>
+            <div  className='flex justify-center gap-[10px]'>
                 {inputElements}
-            </form>
+            </div>
         </div>
     )
 }
