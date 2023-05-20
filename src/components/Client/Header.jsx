@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import styles from '../../style';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -14,7 +15,7 @@ const Header = () => {
             <input type="text" className='bg-transparent absolute left-[30px] top-[10px] text-[16px] h-[44px] w-[300px] outline-none placeholder-black' placeholder='Search for...'/>
             <FontAwesomeIcon icon={faMagnifyingGlass} className='text-[32px] absolute right-[16px] top-[16px] text-primary'/>
         </div>
-        <button className={styles.btnPrimary + ' h-[64px]'}>Login/ Register</button>
+        <Link to='/login' className={styles.btnPrimary}>Login/ Register</Link>
     </header>
   )
 }
