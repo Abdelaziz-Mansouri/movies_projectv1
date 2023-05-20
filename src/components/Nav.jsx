@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {Route, Routes } from 'react-router-dom';
 
 import Navigation from './Admin/Navigation';
 import MovieList from './Admin/MovieList';
@@ -30,32 +30,32 @@ const Nav = () => {
           <div className="flex">
         <Navigation />
         <div className="relative left-[400px] max-w-[calc(100vw-400px)]">
-        <Routes>
-          {/* Admin */}
-          <Route exact path="/" element={<MovieList />} />
-          <Route exact path="/movies" element={<MovieList />} />
-          <Route exact path="/movies/new" element={<MovieForm />} />
-          <Route exact path="/movies/:id" element={<MovieForm />} />
-          <Route exact path="/updateImage/:id" element={<ImageEdit />} />
-          <Route exact path="/genres" element={<GenreList />} />
-          <Route exact path="/genres/new" element={<GenreForm />} />
-          <Route exact path="/genres/:id" element={<GenreForm />} />
-          <Route exact path="/directors" element={<DirectorList />} />
-          <Route exact path="/directors/new" element={<DirectorForm />} />
-          <Route exact path="/directors/:id" element={<DirectorForm />} />
-          <Route exact path="/actors" element={<ActorList />} />
-          <Route exact path="/actors/new" element={<ActorForm />} />
-          <Route exact path="/actors/:id" element={<ActorForm />} />
-          <Route exact path="/ratings" element={<RatingList />} />
-          <Route exact path="/ratings/new" element={<RatingForm />} />
-          <Route exact path="/ratings/:idFromList" element={<RatingForm />} />
-          <Route exact path="/casts" element={<CastList />} />
-          <Route exact path="/casts/new" element={<CastForm />} />
-          <Route exact path="/casts/:id" element={<CastForm />} />
-          <Route exact path="/users" element={<ListUsers />} />
-          <Route exact path="/admins" element={<AdminList />} />
-          {/* Client */}
-        </Routes>
+          <Routes>
+            {/* Admin */}
+            <Route exact path="/" element={<MovieList />} />
+            <Route exact path="/movies" element={<MovieList />} />
+            <Route exact path="/movies/new" element={<MovieForm />} />
+            <Route exact path="/movies/:id" element={<MovieForm />} />
+            <Route exact path="/updateImage/:id" element={<ImageEdit />} />
+            <Route exact path="/genres" element={<GenreList />} />
+            <Route exact path="/genres/new" element={<GenreForm />} />
+            <Route exact path="/genres/:id" element={<GenreForm />} />
+            <Route exact path="/directors" element={<DirectorList />} />
+            <Route exact path="/directors/new" element={<DirectorForm />} />
+            <Route exact path="/directors/:id" element={<DirectorForm />} />
+            <Route exact path="/actors" element={<ActorList />} />
+            <Route exact path="/actors/new" element={<ActorForm />} />
+            <Route exact path="/actors/:id" element={<ActorForm />} />
+            <Route exact path="/ratings" element={<RatingList />} />
+            <Route exact path="/ratings/new" element={<RatingForm />} />
+            <Route exact path="/ratings/:idFromList" element={<RatingForm />} />
+            <Route exact path="/casts" element={<CastList />} />
+            <Route exact path="/casts/new" element={<CastForm />} />
+            <Route exact path="/casts/:id" element={<CastForm />} />
+            <Route exact path="/users" element={<ListUsers />} />
+            <Route exact path="/admins" element={<AdminList />} />
+            {/* Client */}
+          </Routes>
         </div>
         
       </div>
