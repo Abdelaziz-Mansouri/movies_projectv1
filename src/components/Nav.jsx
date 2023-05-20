@@ -17,9 +17,10 @@ import CastForm from './Admin/CastForm';
 
 import Home from './Client/Home';
 import ImageEdit from './Admin/ImageEdit';
-
-import Register from './Client/Login_Register/Register';
 import Login from './Client/Login_Register/Login';
+import Register from './Client/Login_Register/Register';
+import ListUsers from './Admin/ListUsers';
+import AdminList from './Admin/AdminList';
 
 const Nav = () => {
   return (
@@ -51,6 +52,8 @@ const Nav = () => {
           <Route exact path="/casts" element={<CastList />} />
           <Route exact path="/casts/new" element={<CastForm />} />
           <Route exact path="/casts/:id" element={<CastForm />} />
+          <Route exact path="/users" element={<ListUsers />} />
+          <Route exact path="/admins" element={<AdminList />} />
           {/* Client */}
         </Routes>
         </div>

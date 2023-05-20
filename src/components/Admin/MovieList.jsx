@@ -15,7 +15,6 @@ const MovieList = () => {
 
   const [movies, setMovies] = useState([]);
 
-
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {

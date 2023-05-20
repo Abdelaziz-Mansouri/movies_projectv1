@@ -23,6 +23,8 @@ function Navigation() {
         <li className='pl-[60px] h-[51px] flex items-center'><Link to="/actors">Actors</Link></li>
         <li className='pl-[60px] h-[51px] flex items-center'><Link to="/ratings">Ratings</Link></li>
         <li className='pl-[60px] h-[51px] flex items-center'><Link to="/casts">Casts</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/users">Users</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admins">Admins</Link></li>
       </ul>
     </div>
   );

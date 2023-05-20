@@ -3,6 +3,8 @@ import axios from '../../api/axios';
 
 import MoviePicture from './MoviePicture'
 import styles from '../../style';
+import {Genre1} from '../../assets/genrePictures'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -13,12 +15,15 @@ const MovieGroup = ({propVal}) => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+  
+  const [imageEdit , setImageEdit] = useState([]);
+  const [imageFetched, setImageFetched] = useState(false);
 
+  const urlImage = 'https://192.168.1.17:5020/Resources/';
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {
         setMovies(response.data);
-        console.log(response);
       })
       .catch(error => {
         console.log(error);
@@ -27,12 +32,11 @@ const MovieGroup = ({propVal}) => {
     axios.get('/Genres')
       .then((response) => {
         setGenres(response.data);
-        console.log(response);
       })
-      .catch(err => console.log(err))
-
+    .catch(err => console.log(err));
   }, []);
-
+  
+  
   const moviesContainer = useRef();
 
   const showMore = (e) => {
@@ -53,7 +57,7 @@ const MovieGroup = ({propVal}) => {
   const [selectedYear, setSelectedYear] = useState("All");
 
   
-
+  console.log(imageEdit);
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   }
@@ -64,8 +68,7 @@ const MovieGroup = ({propVal}) => {
     }
   },[propVal])
 
-  const filterData = () => {
-    console.log(selectedOption);
+  const filterData = () => {;
 
     if (selectedOption == "All") {
       return movies;
@@ -80,8 +83,7 @@ const MovieGroup = ({propVal}) => {
     setSelectedYear(e.target.value);
   }
 
-  const filterYear = () => {
-    console.log(selectedYear);
+  const filterYear = () => {;
 
     if (selectedYear == "All") {
       return filteredData;
@@ -92,11 +94,14 @@ const MovieGroup = ({propVal}) => {
 
   const filteredYear = filterYear();
   filterYear()
-
+  
   const mov = () => (
-    filteredYear.map(movie => (
-      <MoviePicture key={movie.id} id={movie.id} title={movie.title} nameGenre={movie.nameGenre} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
-    ))
+    filteredYear.map((movie , index) => {
+      console.log(movie.images[0].image);
+      return(
+        <MoviePicture key={movie.id} id={movie.id} title={movie.title}  nameGenre={movie.nameGenre} imageUrl={movie.images[0].image ? urlImage + movie.images[0].image : Genre1} releaseDate={movie.releaseDate.slice(0, 4)} nameRating={movie.nameRating} />
+        )
+      })
   )
 
   return (
