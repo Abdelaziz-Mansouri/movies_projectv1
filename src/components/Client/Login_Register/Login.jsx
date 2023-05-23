@@ -3,7 +3,12 @@ import styles from '../../../style'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from '../../../api/axios'
 
+import Cookies from 'universal-cookie'
+import jwt from 'jwt-decode'
+
 const Login = () => {
+
+    const cookies = new Cookies();
 
     const Navigate = useNavigate()
 
@@ -12,17 +17,36 @@ const Login = () => {
         password: ''
     });
 
+    const [userRole, setUserRole] = useState('');
+    const [user, setUser] = useState(null);
+
+
     const handleInput = (e) => {
         setData({ ...data, [e.target.id]: e.target.value })
         console.log(data);
     }
     const handleSubmit = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         axios.post('/Tokens/SignIn', data).then((res) => {
             console.log(res);
             const { token } = res.data;
-            localStorage.setItem('token', token);
-            Navigate('/')
+            const role = res.data.role;
+            setUserRole(role);
+            console.log(role);
+
+
+            // * storing token in a cookie
+
+            const decoded = jwt(token)
+
+            setUser(decoded)
+            console.log(user);
+
+            cookies.set('jwt_authorization', token,{
+                expires: new Date(decoded.exp * 1000)
+            })
+
+            // Navigate('/')
 
         }).catch(err => console.log(err))
     }

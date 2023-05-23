@@ -16,7 +16,7 @@ const ImageEdit = () => {
         Image : []
     });
 
-    const urlImage = 'https://192.168.1.17:5020/Resources/';
+    const urlImage = 'https://192.168.1.13:5020/Resources/';
     useEffect(() => {
         if (id) {
         const fetchData = async () => {

@@ -19,7 +19,7 @@ const MovieGroup = ({propVal}) => {
   const [imageEdit , setImageEdit] = useState([]);
   const [imageFetched, setImageFetched] = useState(false);
 
-  const urlImage = 'https://192.168.1.17:5020/Resources/';
+  const urlImage = 'https://192.168.1.13:5020/Resources/';
   useEffect(() => {
     axios.get('/Movies/CustomerGet')
       .then(response => {
