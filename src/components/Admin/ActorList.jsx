@@ -50,7 +50,7 @@ const ActorList = () => {
             <tr key={actor.id} className='bg-secondary '>
               <td className='p-[20px]'>{actor.firstName}</td>
               <td>{actor.lastName}</td>
-              <td className='text-white text-[18px] pl-[10px]'><Link to={`/actors/${actor.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/actors/${actor.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
               <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteActor(actor.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
             </tr>
           ))}

@@ -145,7 +145,7 @@ const RatingForm = () => {
           />
           <div className="w-full flex justify-center gap-[18px]">
             <button className={styles.btnPrimary + ' w-[20%]'} disabled={false}>{idFromList ? "Update" : "Add"}</button>
-            <Link to='/ratings' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+            <Link to='/admin/ratings' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
           </div>
         </form>
       </div>

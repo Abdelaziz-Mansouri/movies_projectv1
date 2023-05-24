@@ -59,7 +59,7 @@ const DirectorForm = () => {
         <input className={styles.input + ' w-full'} placeholder='Last Name' type="text" id='lastName' value={director.lastName} onInput={(e) => { handleInput(e) }} />
         <div className="w-full flex justify-center gap-[18px]">
           <button className={styles.btnPrimary + ' w-[20%]'} onClick={(e) => { handleSubmit(e) }}>{!id ? 'Ajouter' : 'Update'}</button>
-          <Link to='/directors' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+          <Link to='/admin/directors' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
         </div>
       </form>
     </>

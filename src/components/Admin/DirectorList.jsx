@@ -50,7 +50,7 @@ const DirectorList = () => {
               <tr key={director.id} className='bg-secondary '>
                 <td className='p-[20px]'>{director.firstName}</td>
                 <td>{director.lastName}</td>
-                <td className='text-white text-[18px] pl-[10px]'><Link to={`/directors/${director.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+                <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/directors/${director.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
                 <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteDirector(director.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
               </tr>
             ))}

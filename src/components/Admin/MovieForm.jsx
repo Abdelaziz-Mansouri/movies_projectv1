@@ -226,7 +226,7 @@ const MovieForm = () => {
       <div className="w-full flex justify-center gap-[18px]">
 
       <button disabled={false} className={styles.btnPrimary + ' w-[20%]'}>{id ? "Update" : "Add"}</button>
-      <Link to='/movies' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+      <Link to='/admin/movies' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
 
       </div>
         

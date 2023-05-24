@@ -12,7 +12,7 @@ const Register = () => {
         lastName: '',
         email: '',
         password: '',
-        passwordConfirm : ''
+        confirmPassword : ''
     });
 
     const handleInput = (e) => {
@@ -22,8 +22,8 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(data.firstName != "" && data.lastName != "" && data.email != "" && data.password != "" && data.password == data.passwordConfirm){
-            axios.post('/Users/SignUp', data).then((res) => {
+        if(data.firstName != "" && data.lastName != "" && data.email != "" && data.password != "" && data.password == data.confirmPassword){
+            axios.post('/Register/SignUp', data).then((res) => {
                 console.log(res);
                 Navigate('/login')
             }).catch(err => console.log(err))
@@ -40,7 +40,7 @@ const Register = () => {
                 </div>
                 <input id='email' onInput={handleInput} required placeholder='Email' type="email" className={styles.loginInput} />
                 <input id='password' onInput={handleInput} required placeholder='Password' type="password" className={styles.loginInput} />
-                <input id='passwordConfirm' onInput={handleInput} required placeholder='Confirm Password' type="password" className={styles.loginInput} />
+                <input id='confirmPassword' onInput={handleInput} required placeholder='Confirm Password' type="password" className={styles.loginInput} />
 
                 <button type='submit' onClick={handleSubmit} className={styles.loginBtn}>Register</button>
                 <Link className='text-white text-center text-[24px]' to='/login'>Already have account? Login</Link>

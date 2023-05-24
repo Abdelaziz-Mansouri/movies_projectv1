@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from '../../../style'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from '../../../api/axios'
@@ -6,7 +6,11 @@ import axios from '../../../api/axios'
 import Cookies from 'universal-cookie'
 import jwt from 'jwt-decode'
 
+import UserContext from '../../UserContext'
+
 const Login = () => {
+
+    const { user, setUser } = useContext(UserContext);
 
     const cookies = new Cookies();
 
@@ -17,8 +21,6 @@ const Login = () => {
         password: ''
     });
 
-    const [userRole, setUserRole] = useState('');
-    const [user, setUser] = useState(null);
 
 
     const handleInput = (e) => {
@@ -30,25 +32,34 @@ const Login = () => {
         axios.post('/Tokens/SignIn', data).then((res) => {
             console.log(res);
             const { token } = res.data;
-            const role = res.data.role;
-            setUserRole(role);
-            console.log(role);
 
+            // * storing decoded token in the global state
+
+            const decoded = jwt(token)
+            console.log(decoded);
+
+            setUser(decoded)
 
             // * storing token in a cookie
 
-            const decoded = jwt(token)
-
-            setUser(decoded)
-            console.log(user);
-
-            cookies.set('jwt_authorization', token,{
+            cookies.set('jwt_authorization', token, {
                 expires: new Date(decoded.exp * 1000)
             })
 
-            // Navigate('/')
+            Navigate('/')
 
         }).catch(err => console.log(err))
+
+        // // ! has to be removed
+
+        // try {
+        //     setUser(jwt(cookies.get('jwt_authorization')))
+
+
+        // } catch (err) {
+        //     console.log(err);
+        // }
+
     }
 
     return (

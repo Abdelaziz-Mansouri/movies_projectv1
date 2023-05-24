@@ -48,7 +48,7 @@ const GenreList = () => {
           {genres.map((genre) => (
             <tr key={genre.id} className='bg-secondary '>
               <td className='p-[20px]'>{genre.name}</td>
-              <td className='text-white text-[18px] pl-[10px]'><Link to={`/genres/${genre.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/genres/${genre.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
               <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteGenre(genre.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
               <td className='text-white text-[18px] pl-[10px]'><Link ><FontAwesomeIcon icon={faImages} /></Link></td>
             </tr>

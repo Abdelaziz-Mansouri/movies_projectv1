@@ -54,7 +54,7 @@ const RatingList = () => {
               <td className='p-[20px]'>{rating.id}</td>
               <td>{rating.name}</td>
               <td>{rating.description}</td>
-              <td className='text-white text-[18px] pl-[10px]'><Link to={`/ratings/${rating.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/ratings/${rating.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
               <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteRatings(rating.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
             </tr>
           ))}

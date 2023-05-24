@@ -87,7 +87,7 @@ const CastForm = () => {
         <div className="w-full flex justify-center gap-[18px]">
 
         <button className={styles.btnPrimary + ' w-[20%]'} onClick={(e) => { handleSubmit(e) }}>{id ? 'Modifier' : 'Ajouter'}</button>
-          <Link to='/casts' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
+          <Link to='/admin/casts' className={styles.btnSecondary + ' w-[20%]'}>Ignore</Link>
         </div>
       </form>
     </>

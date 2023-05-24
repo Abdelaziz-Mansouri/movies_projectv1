@@ -8,7 +8,7 @@ const TableCadre = (props) => {
         <>
             <div className="mt-[70px] mb-[40px] flex justify-between">
                 <h1 className='font-bold text-[33px] leading-[40px] relative -left-[20px]'>{props.listName} List</h1>
-                <Link className={styles.btnPrimary + ' w-[300px]'} to={props.linkNew}>{props.link ? props.link : 'Add'} {props.addButton} <FontAwesomeIcon className='px-[20px]' icon={faRightLong} /></Link>
+                <Link className={styles.btnPrimary + ' w-[300px]'} to={'/admin'+props.linkNew}>{props.link ? props.link : 'Add'} {props.addButton} <FontAwesomeIcon className='px-[20px]' icon={faRightLong} /></Link>
             </div>
 
             <table className='w-[1030px] border-separate border-spacing-y-[13px] text-left'>

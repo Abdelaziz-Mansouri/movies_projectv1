@@ -62,9 +62,9 @@ const MovieList = () => {
               <td>{movie.nameGenre}</td>
               <td>{movie.lastName} {movie.fistName}</td>
               <td>{movie.nameRating}</td>
-              <td className='text-white text-[18px] pl-[10px]'><Link to={`/movies/${movie.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/movies/${movie.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
               <td className='text-white text-[18px] pl-[10px]'><button onClick={() => deleteMovie(movie.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
-              <td className='text-white text-[18px] pl-[10px]'><Link to={`/updateImage/${movie.id}`}><FontAwesomeIcon icon={faImages} /></Link></td>
+              <td className='text-white text-[18px] pl-[10px]'><Link to={`/admin/updateImage/${movie.id}`}><FontAwesomeIcon icon={faImages} /></Link></td>
             </tr>
           ))}
         </>

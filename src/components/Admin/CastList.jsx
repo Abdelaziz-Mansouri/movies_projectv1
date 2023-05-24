@@ -52,7 +52,7 @@ const CastList = () => {
                             <td className='p-[20px]'>{cast.characterName}</td>
                             <td>{cast.movieName}</td>
                             <td>{cast.actorName}</td>
-                            <td><Link to={`/casts/${cast.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
+                            <td><Link to={`/admin/casts/${cast.id}`}><FontAwesomeIcon icon={faPen} /></Link></td>
                             <td><button onClick={() => deleteCast(cast.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
                         </tr>
                     ))}

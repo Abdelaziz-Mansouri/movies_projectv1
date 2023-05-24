@@ -17,14 +17,14 @@ function Navigation() {
             <h1 className='text-[22px] leading-[27px]'>Logo</h1>
         </div>
       <ul onClick={linkat} className='22px'>
-        <li className='pl-[60px] h-[51px] flex items-center bg-secondary'><Link to="/movies">Movies</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/genres">Genres</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/directors">Directors</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/actors">Actors</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/ratings">Ratings</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/casts">Casts</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/users">Users</Link></li>
-        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admins">Admins</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center bg-secondary'><Link to="/admin/movies">Movies</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/genres">Genres</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/directors">Directors</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/actors">Actors</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/ratings">Ratings</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/casts">Casts</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/users">Users</Link></li>
+        <li className='pl-[60px] h-[51px] flex items-center'><Link to="/admin/admins">Admins</Link></li>
       </ul>
     </div>
   );

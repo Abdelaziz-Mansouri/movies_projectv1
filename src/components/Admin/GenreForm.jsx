@@ -61,7 +61,7 @@ const GenreForm = () => {
         </div>
         <div className="flex justify-center w-full gap-[18px]">
           <button className={styles.btnPrimary + ' w-full'} onClick={(e) => { handleSubmit(e) }}>{!id ? 'Ajouter' : 'Update'}</button>
-          <Link to='/genres' className={styles.btnSecondary + ' w-full'}>Ignore</Link>
+          <Link to='/admin/genres' className={styles.btnSecondary + ' w-full'}>Ignore</Link>
         </div>
       </form>
 
