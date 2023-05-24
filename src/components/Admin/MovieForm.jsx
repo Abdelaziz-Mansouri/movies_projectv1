@@ -137,6 +137,7 @@ const MovieForm = () => {
           .then(res => {
           }).catch(resErr => console.log(resErr))
       }
+      navigate('/admin/movies')
 
     } catch (error) {
       console.log(error)
@@ -200,6 +201,7 @@ const MovieForm = () => {
         <select value={myData.ratingId} onChange={handleSelectChangeRating}
           className={styles.input + ' w-full'}
         >
+          <option>--select rating--</option>
           {selectedOptionRating.map(option => (
             <option key={option.id} value={option.id}>
               {option.name}

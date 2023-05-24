@@ -31,7 +31,7 @@ const GenreForm = () => {
       const response = await axios.put(`/Genres/UpdateGenre/${id}`, { id: genre.id, name: genre.name }).catch(err => console.log(err));
       console.log(JSON.stringify(response));
     }
-    navigate('/genres')
+    navigate('/admin/genres')
 
   }
   useEffect(() => {

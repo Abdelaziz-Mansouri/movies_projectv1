@@ -32,7 +32,7 @@ const DirectorForm = () => {
       console.log(JSON.stringify(response));
     }
 
-    navigate('/directors')
+    navigate('/admin/directors')
   }
   useEffect(() => {
     if (id) {

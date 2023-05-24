@@ -12,7 +12,8 @@ import TableCadre from './TableCadre';
 
 const ListUsers = () => {
     const [users , setUsers] = useState([]);
-    useEffect(() =>{
+
+    const getInfoUsers = ()=>{
         axios.get('/Users/GetAllUser')
         .then(response => {
             setUsers(response.data)
@@ -20,7 +21,10 @@ const ListUsers = () => {
         .catch(error =>{
             console.log(error);
         })
-    })
+    }
+    useEffect(() =>{
+        getInfoUsers();
+    }, [])
     const deleteusers=(id)=>{
         axios.delete(`/Users/DeleteUser/${id}`)
         .then(response => {
@@ -32,10 +36,11 @@ const ListUsers = () => {
         });
     }
     const makeAdmin=(idU, role)=>{
-        axios.put(`/Users/ChangeRole?UserId=${idU}&Role=${role === 'admin' ? 'user' : 'admin'}`)
+        axios.put(`/Users/ChangeRole?UserId=${idU}&Role=${role === 'Admin' ? 'User' : 'Admin'}`)
         .then(response => {
             console.log(response);
             // window.location.reload();
+            getInfoUsers();
         })
         .catch(error => {
             console.log(error);
@@ -57,11 +62,11 @@ const ListUsers = () => {
             body={
                 <>
                 {users.map(user => (
-                    <tr key={user.id} className='bg-secondary '>
+                    <tr key={user.id} className='bg-secondary rounded-[10px]'>
                     <td className='p-[20px]'>{user.username}</td>
                     <td>{user.email}</td>
                     <td>{user.role}</td>
-                    <td><button className={`${styles.btnTable}`} onClick={(e) => makeAdmin(user.id , user.role)}>{user.role === 'admin' ? 'make User' : 'Make Admin'}</button></td>
+                    <td><button className={`${styles.btnTable}`} onClick={(e) => makeAdmin(user.id , user.role)}>{user.role === 'Admin' ? 'Make User' : 'Make Admin'}</button></td>
                     <td className='text-white text-[18px] pl-[10px]'><button onClick={(e) => deleteusers(user.id)}><FontAwesomeIcon icon={faCircleXmark} /></button></td>
                     </tr>
                 ))}
