@@ -46,7 +46,7 @@ const ActorForm = () => {
       response = await axios.post('/Actors/AddActor', { id: actor.id, firstName: actor.firstName, lastName: actor.lastName }).catch(err => console.log(err));
     }
     console.log(JSON.stringify(response));
-    navigate('/actors')
+    navigate('/admin/actors')
   }
 
   return (

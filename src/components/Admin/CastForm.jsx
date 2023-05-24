@@ -68,7 +68,7 @@ const CastForm = () => {
       response = await axios.post('/Casts/AddCast', { id: cast.id, characterName: cast.characterName, movieId: cast.movieId, actorId: cast.actorId  }).catch(err => console.log(err));
     }
     console.log(JSON.stringify(response));
-    navigate('/casts')
+    navigate('/admin/casts')
   }
 
   return (

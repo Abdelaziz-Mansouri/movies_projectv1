@@ -102,7 +102,7 @@ const RatingForm = () => {
     }
 
 
-    navigate('/Ratings')
+    navigate('/admin/Ratings')
   }
 
 

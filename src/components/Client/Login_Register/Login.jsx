@@ -10,7 +10,7 @@ import UserContext from '../../UserContext'
 
 const Login = () => {
 
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
     const cookies = new Cookies();
 
@@ -46,7 +46,12 @@ const Login = () => {
                 expires: new Date(decoded.exp * 1000)
             })
 
-            Navigate('/')
+            if (decoded?.Role == 'Admin') {
+                Navigate('/admin')
+            } else {
+                Navigate('/')
+                console.log(decoded?.Role);
+            }
 
         }).catch(err => console.log(err))
 

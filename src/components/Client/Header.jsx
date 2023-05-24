@@ -2,13 +2,25 @@ import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../style';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import Cookies from 'universal-cookie';
 
 import UserContext from '../UserContext';
 
 const Header = () => {
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+
+  const cookies = new Cookies();
+
+  const navigate = useNavigate()
+
+  const logout = () => {
+    cookies.remove('jwt_authorization');
+    setUser(null)
+    navigate('/login')
+  }
 
   return (
     <header className='h-[160px] w-full flex justify-around items-center'>
@@ -21,7 +33,7 @@ const Header = () => {
         <FontAwesomeIcon icon={faMagnifyingGlass} className='text-[32px] absolute right-[16px] top-[16px] text-primary' />
       </div>
       {user ?
-        <Link to='/' className={styles.btnPrimary}>logout</Link>
+        <button onClick={logout} className={styles.btnPrimary}>logout</button>
         :
         <Link to='/login' className={styles.btnPrimary}>Login/ Register</Link>
       }

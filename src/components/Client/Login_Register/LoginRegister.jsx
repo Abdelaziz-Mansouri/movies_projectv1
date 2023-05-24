@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { Routes, Route, useRoutes } from 'react-router'
+import React, { useContext, useEffect, useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router'
 import Register from './Register'
 import Login from './Login'
 import Home from '../Home'
@@ -20,37 +20,33 @@ const LoginRegister = () => {
     const [userState, setUserState] = useState('')
 
     useEffect(() => {
-        try{
-        setUser(jwt(cookies.get('jwt_authorization')))
-        }catch(err){
+        try {
+            setUser(jwt(cookies.get('jwt_authorization')))
+        } catch (err) {
             console.log(err);
         }
-    },[])
+    }, [])
 
     useEffect(() => {
-
-
-        try{
-        setUserState(user?.Firstname)
-
-        }catch(err){
+        try {
+            setUserState(user?.Role)
+        } catch (err) {
             console.log(err);
         }
 
         console.log(user, userState);
-    },[user])
+    }, [user])
 
     return (
         <>
-            <Nav />
+            {userState == 'Admin' ? <Nav /> : null}
             <Routes>
-                {userState == 'test' ? <Route exact path="/" element={<Home />} /> : null}
-                <Route exact path="/register" element={<Register />} />
-                <Route exact path="/login" element={<Login />} />
-                {/* <Route exact path="*" element={<Login />} /> */}
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/register" element={userState ? <Navigate to="/" /> : <Register />} />
+                <Route exact path="/login" element={userState ? <Navigate to="/" /> : <Login />} />
             </Routes>
         </>
-            
+
         // <Routes>
         //     <Route exact path="/" element={<Home />} />
         //     <Route exact path="/register" element={<Register />} />
