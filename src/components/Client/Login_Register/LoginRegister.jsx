@@ -5,6 +5,8 @@ import Login from './Login'
 import Home from '../Home'
 import Nav from '../../Nav'
 import UserContext from '../../UserContext'
+import VerifEmailForPassword from './VerifEmailForPassword'
+import ForgetPassword from './ForgetPassword';
 
 import Cookies from 'universal-cookie'
 import jwt from 'jwt-decode'
@@ -42,6 +44,8 @@ const LoginRegister = () => {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
                 <Route exact path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+                <Route exact path="/verifEmail" element={user ? <Navigate to="/" /> : <VerifEmailForPassword/>} />
+                <Route exact path="/forgetPassword/:token" element={user ? <Navigate to="/" /> : <ForgetPassword/>} />
             </Routes>
         </>
 
