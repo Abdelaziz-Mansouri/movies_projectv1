@@ -33,8 +33,6 @@ const LoginRegister = () => {
         } catch (err) {
             console.log(err);
         }
-
-        console.log(user, userState);
     }, [user])
 
     return (
@@ -42,8 +40,8 @@ const LoginRegister = () => {
             {userState == 'Admin' ? <Nav /> : null}
             <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route exact path="/register" element={userState ? <Navigate to="/" /> : <Register />} />
-                <Route exact path="/login" element={userState ? <Navigate to="/" /> : <Login />} />
+                <Route exact path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+                <Route exact path="/login" element={user ? <Navigate to="/" /> : <Login />} />
             </Routes>
         </>
 

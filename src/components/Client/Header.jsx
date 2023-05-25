@@ -16,7 +16,7 @@ const Header = () => {
 
   const navigate = useNavigate()
 
-  const logout = () => {
+  const logout = async () => {
     cookies.remove('jwt_authorization');
     setUser(null)
     navigate('/login')
