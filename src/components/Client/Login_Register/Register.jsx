@@ -23,7 +23,7 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(data.firstName != "" && data.lastName != "" && data.email != "" && data.password != "" && data.password == data.confirmPassword){
-            axios.post('/Register/SignUp', data).then((res) => {
+            axios.post('/Users/SignUp', data).then((res) => {
                 console.log(res);
                 Navigate('/login')
             }).catch(err => console.log(err))
