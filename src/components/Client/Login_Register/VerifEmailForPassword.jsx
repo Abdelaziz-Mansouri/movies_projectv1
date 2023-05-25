@@ -6,22 +6,12 @@ import axios from '../../../api/axios'
 import Cookies from 'universal-cookie'
 import jwt from 'jwt-decode'
 
-import UserContext from '../../UserContext'
+import UserContext from '../../UserContext';
 
-const Login = () => {
-
-    const { setUser } = useContext(UserContext);
-
-    const cookies = new Cookies();
-
-    const Navigate = useNavigate()
-
+const VerifEmailForPassword = () => {
     const [data, setData] = useState({
-        email: '',
-        password: ''
+        email: ''
     });
-
-
 
     const handleInput = (e) => {
         setData({ ...data, [e.target.id]: e.target.value })
@@ -35,23 +25,23 @@ const Login = () => {
 
             // * storing decoded token in the global state
 
-            const decoded = jwt(token)
-            console.log(decoded);
+            // const decoded = jwt(token)
+            // console.log(decoded);
 
-            setUser(decoded)
+            // setUser(decoded)
 
-            // * storing token in a cookie
+            // // * storing token in a cookie
 
-            cookies.set('jwt_authorization', token, {
-                expires: new Date(decoded.exp * 1000)
-            })
+            // cookies.set('jwt_authorization', token, {
+            //     expires: new Date(decoded.exp * 1000)
+            // })
 
-            if (decoded?.Role == 'Admin') {
-                Navigate('/admin')
-            } else {
-                Navigate('/')
-                console.log(decoded?.Role);
-            }
+            // if (decoded?.Role == 'Admin') {
+            //     Navigate('/admin')
+            // } else {
+            //     Navigate('/')
+            //     console.log(decoded?.Role);
+            // }
 
         }).catch(err => console.log(err))
 
@@ -67,20 +57,17 @@ const Login = () => {
 
     }
 
-    return (
-        <form className='min-w-[550px] h-fit p-[64px] rounded-[22px] bg-secondary absolute inset-[50%] -translate-x-[50%] -translate-y-[50%]'>
+  return (
+    <form className='min-w-[550px] h-fit p-[64px] rounded-[22px] bg-secondary absolute inset-[50%] -translate-x-[50%] -translate-y-[50%]'>
             <h1 className='text-white text-center font-extrabold text-[32px] mb-[31px]'>Login</h1>
             <div className='flex flex-col gap-[20px] justify-center rounded-[22px] '>
                 <input id='email' onInput={handleInput} required placeholder='Email' type="email" className={styles.loginInput} />
-                <input id='password' onInput={handleInput} required placeholder='Password' type="password" className={styles.loginInput} />
 
                 <button type='submit' onClick={handleSubmit} className={styles.loginBtn}>Login</button>
-                <Link className='text-white text-center text-[24px]' to='/register'>Don’t have account yet ? Register</Link>
-                <Link className='text-white text-center text-[24px]' to='/verifEmail'>Forget Password?</Link>
 
             </div>
         </form>
-    )
+  )
 }
 
-export default Login
+export default VerifEmailForPassword
